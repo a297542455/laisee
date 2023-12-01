@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     IonicModule.forRoot({
       mode: 'ios', //配置android ios 都使用一个样式
-      backButtonText: '返回', //配置默认的返回按钮
+      backButtonText: 'back', //配置默认的返回按钮
     }),
     AppRoutingModule,
   ],

@@ -2,21 +2,24 @@
   <ion-toolbar>
     <ion-title collapse="condense">sent-laisee</ion-title>
     <ion-buttons slot="start">
-      <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-icon name="chevron-back-outline" (click)="goBack()"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-icon name="close-outline"></ion-icon>
+      <ion-icon name="close-outline" id="open-toast"></ion-icon>
+      <ion-toast
+        trigger="open-toast"
+        position="middle"
+        message="關閉，該提示3秒后消失"
+        [duration]="3000"
+      ></ion-toast>
     </ion-buttons>
     <ion-progress-bar [value]="currentStep/4" color="laisee"></ion-progress-bar>
-    <!-- <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="nextStep(-1)">上一步</ion-button>
-  <ion-button (click)="nextStep(1)">下一步</ion-button>
+  <ion-button (click)="nextStep(-1)" size="small">上一步</ion-button>
+  <ion-button (click)="nextStep(1)" size="small">下一步</ion-button>
   <ng-container [ngSwitch]="currentStep">
     <app-step1 *ngSwitchCase="1"></app-step1>
     <app-step2 *ngSwitchCase="2"></app-step2>
@@ -27,4 +30,7 @@
       <!-- 默認情況，可以顯示一些內容或者留空 -->
     </div>
   </ng-container>
+  <ion-button [routerLink]="['/folder/demo']" size="small"
+    >Go to folder/demo</ion-button
+  >
 </ion-content>

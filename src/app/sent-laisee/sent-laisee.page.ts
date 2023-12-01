@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sent-laisee.page.scss'],
 })
 export class SentLaiseePage {
-  constructor() {}
+  constructor(private locationStrategy: LocationStrategy) {}
+
   currentStep = 1;
+  goBack() {
+    this.locationStrategy.back();
+  }
   nextStep(num: number) {
     if (this.currentStep + num > 4) {
       this.currentStep = 4;

@@ -3,19 +3,20 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>folder/demo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
+      <ion-title size="large">folder/demo</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>這裏是頁面跳轉的demo，暫無内容，</p>
+    <p>這裏只是爲了展示路由，暫無内容，</p>
+
+    <ion-button [routerLink]="['/sent-laisee']">Go to laisee</ion-button>
   </div>
 </ion-content>
