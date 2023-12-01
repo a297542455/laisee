@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [{ title: 'Inbox', url: '/folder/inbox', icon: 'mail' }];
+  public appPages = [
+    { title: 'sent-laisee', url: '/folder/laisee', icon: 'mail' },
+  ];
   constructor() {}
 }
