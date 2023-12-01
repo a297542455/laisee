@@ -1,16 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-title collapse="condense">sent-laisee</ion-title>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-icon name="chevron-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>sent-laisee</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-buttons>
+    <ion-progress-bar [value]="currentStep/4" color="laisee"></ion-progress-bar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sent-laisee</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button (click)="nextStep(-1)">上一步</ion-button>
+  <ion-button (click)="nextStep(1)">下一步</ion-button>
+  <ng-container [ngSwitch]="currentStep">
+    <app-step1 *ngSwitchCase="1"></app-step1>
+    <app-step2 *ngSwitchCase="2"></app-step2>
+    <app-step3 *ngSwitchCase="3"></app-step3>
+    <app-step4 *ngSwitchCase="4"></app-step4>
+    <!-- ... 繼續添加其他步驟組件 ... -->
+    <div *ngSwitchDefault>
+      <!-- 默認情況，可以顯示一些內容或者留空 -->
+    </div>
+  </ng-container>
 </ion-content>
