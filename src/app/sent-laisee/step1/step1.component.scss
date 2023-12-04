@@ -24,11 +24,30 @@
   font-size: 14px;
 }
 
-.block {
+.error-text {
+  font-size: 12px;
+}
+
+.sent-checkbox {
+  ion-checkbox {
+    --size: 24px;
+    --checkbox-background-checked: #ce005a;
+  }
+
+  ion-checkbox::part(container) {
+    border: 1px solid #ce005a;
+  }
+}
+
+.contacts {
   background-color: #ce005a;
-  margin: 0 -16px 40px;
+  margin: 0 -16px;
   padding: 8px 16px;
   color: #fff;
+}
+.contacts-list {
+  margin-bottom: 40px;
+  color: #ccc;
 }
 
 .next-btn {
