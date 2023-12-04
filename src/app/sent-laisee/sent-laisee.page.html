@@ -18,14 +18,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-button (click)="nextStep(-1)" size="small">上一步</ion-button>
-  <ion-button (click)="nextStep(1)" size="small">下一步</ion-button>
   <ng-container>
     <app-step1 [hidden]="currentStep !== 1"></app-step1>
     <app-step2 [hidden]="currentStep !== 2"></app-step2>
     <app-step3 [hidden]="currentStep !== 3"></app-step3>
     <app-step4 [hidden]="currentStep !== 4"></app-step4>
   </ng-container>
+
+  <ion-button (click)="nextStep(-1)" size="small">上一步</ion-button>
+  <ion-button (click)="nextStep(1)" size="small">下一步</ion-button>
   <ion-button [routerLink]="['/folder/demo']" size="small"
     >Go to folder/demo</ion-button
   >

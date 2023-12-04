@@ -1,0 +1,63 @@
+.header {
+  position: relative;
+  height: 180px;
+}
+.caishen {
+  position: absolute;
+  height: 160px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-button {
+  --color: inherit; /* 使按钮的颜色继承父元素的颜色 */
+  --padding-start: 0;
+}
+
+.custom-input {
+  width: 100%;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background-color: #ffefef;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.block {
+  background-color: #ce005a;
+  margin: 0 -16px 40px;
+  padding: 8px 16px;
+  color: #fff;
+}
+
+.next-btn {
+  margin-bottom: 40px;
+}
+
+.accordion-group {
+  margin: 0 -16px 40px;
+  // 手風琴圖標
+  ion-item::part(native) {
+    background-color: #fffff7;
+    color: #da5173;
+  }
+  // 手風琴文字
+  .sc-ion-label-ios-h {
+    color: #333;
+  }
+
+  [slot="content"] {
+    background: #fffff7;
+    color: #666;
+    padding: 10px;
+  }
+}
+
+.remarks {
+  display: flex;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}

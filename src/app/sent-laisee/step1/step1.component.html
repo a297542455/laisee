@@ -1,3 +1,70 @@
-<p>
-  step1 works!
-</p>
+<div class="header">
+  <img src="assets/img/caishen.png" alt="" class="caishen" />
+</div>
+
+<div class="content">
+  <ion-button
+    fill="clear"
+    id="click-trigger"
+    size="small"
+    class="custom-button mb10"
+  >
+    <strong>Send 🧧 to</strong>
+    <ion-icon slot="end" name="help-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding"
+        >文案解釋説明文案解釋説明文案解釋説明文案解釋説明文案解釋説明</ion-content
+      >
+    </ng-template>
+  </ion-popover>
+
+  <input
+    type="text"
+    [(ngModel)]="form.name"
+    name="name"
+    required
+    #name="ngModel"
+    class="custom-input mb10"
+    color="laisee"
+    placeholder="Phone No., Payee Name, Email or FPS ID"
+  />
+
+  <ion-button
+    fill="clear"
+    id="click-trigger"
+    size="small"
+    class="custom-button mb10"
+    disabled
+  >
+    <ion-icon name="sunny-outline" color="laisee"></ion-icon>
+    For Phone No, include Country / Area Code
+  </ion-button>
+
+  <div class="block mb20">Contacts</div>
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn"
+    >Next</ion-button
+  >
+
+  <ion-accordion-group class="accordion-group" color="laisee">
+    <ion-accordion>
+      <ion-item button detail lines="full" slot="header">
+        <ion-label>Remarks</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-grid>
+          <ion-row *ngFor="let i of [1, 2, 3]">
+            <ion-col size="1">{{ i }}.</ion-col>
+            <ion-col>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Consequuntur hic cum ullam recusandae voluptatum, labore culpa
+              aliquam nemo magni modi.</ion-col
+            >
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</div>

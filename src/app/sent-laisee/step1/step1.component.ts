@@ -5,10 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './step1.component.html',
   styleUrls: ['./step1.component.scss'],
 })
-export class Step1Component  implements OnInit {
+export class Step1Component {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  form = {
+    name: 'zs',
+  };
 }
