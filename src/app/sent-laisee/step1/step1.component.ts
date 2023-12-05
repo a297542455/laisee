@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -12,6 +12,8 @@ import {
   styleUrls: ['./step1.component.scss'],
 })
 export class Step1Component implements OnInit {
+  @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(private fb: FormBuilder) {}
 
   form = this.fb.group({
@@ -21,7 +23,6 @@ export class Step1Component implements OnInit {
   get name() {
     return this.form.get('name');
   }
-
   ngOnInit() {
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
@@ -65,5 +66,7 @@ export class Step1Component implements OnInit {
     }
   }
 
-  onSubmit() {}
+  get datavalid() {
+    return this.checkboxOptions.some((item) => item.checked);
+  }
 }

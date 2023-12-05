@@ -14,10 +14,10 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ng-container>
-    <app-step1 [hidden]="currentStep !== 1"></app-step1>
-    <app-step2 [hidden]="currentStep !== 2"></app-step2>
-    <app-step3 [hidden]="currentStep !== 3"></app-step3>
-    <app-step4 [hidden]="currentStep !== 4"></app-step4>
+    <app-step1 [hidden]="currentStep !== 1" (nextStep)="nextStep($event)"></app-step1>
+    <!-- <app-step2 [hidden]="currentStep !== 2" (nextStep)="nextStep($event)"></app-step2>
+    <app-step3 [hidden]="currentStep !== 3" (nextStep)="nextStep($event)"></app-step3>
+    <app-step4 [hidden]="currentStep !== 4" (nextStep)="nextStep($event)"></app-step4> -->
   </ng-container>
 
   <div>

@@ -14,7 +14,7 @@
   </ion-popover>
 
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <form [formGroup]="form">
     <div class="form-group">
       <div>{{form.status}}</div>
       <input type="text" formControlName="name" required class="custom-input mb10 form-control" id="name" color="laisee"
@@ -52,7 +52,8 @@
     </ion-grid> -->
   </div>
 
-  <ion-button expand="full" shape="round" color="laisee" class="next-btn">Next</ion-button>
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!datavalid"
+    (click)="nextStep.emit(1)">Next</ion-button>
 
   <ion-accordion-group class="accordion-group" color="laisee">
     <ion-accordion>
