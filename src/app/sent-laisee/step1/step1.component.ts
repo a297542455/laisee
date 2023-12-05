@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -12,13 +12,12 @@ import {
   styleUrls: ['./step1.component.scss'],
 })
 export class Step1Component implements OnInit {
+  @Input() form: FormGroup;
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private fb: FormBuilder) {}
-
-  form = this.fb.group({
-    name: ['', Validators.required],
-  });
+  constructor(private fb: FormBuilder) {
+    this.form = new FormGroup({});
+  }
 
   get name() {
     return this.form.get('name');
@@ -35,8 +34,28 @@ export class Step1Component implements OnInit {
   contacts = [
     { value: '13333333333', label: 'Tina電話' },
     { value: '123@qq.com', label: 'Tina郵箱' },
-    { value: '88888888', label: 'Tina FPS' },
+    { value: '888888888', label: 'Tina FPS' },
   ];
+
+  actionSheetButtons = [
+    {
+      text: 'Tina電話: 13333333333',
+      data: '13333333333',
+    },
+    {
+      text: 'Tina郵箱: 123@qq.com',
+      data: '123@qq.com',
+    },
+    {
+      text: 'Tina FPS: 888888888',
+      data: '888888888',
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+    },
+  ];
+
   checkboxOptions = [
     { label: 'Mobile No', checked: false },
     { label: 'Email', checked: false },

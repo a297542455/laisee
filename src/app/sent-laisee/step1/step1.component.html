@@ -16,8 +16,7 @@
 
   <form [formGroup]="form">
     <div class="form-group">
-      <div>{{form.status}}</div>
-      <input type="text" formControlName="name" required class="custom-input mb10 form-control" id="name" color="laisee"
+      <input type="text" formControlName="name" required class="custom-input mb10 form-control" color="laisee"
         placeholder="Phone No., Payee Name, Email or FPS ID" />
       <div *ngIf="name?.errors; else elseBlock" class="alert">
         <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="error-text">Please enter a valid mobile
@@ -42,14 +41,16 @@
     For Phone No, include Country / Area Code
   </ion-button>
 
-  <div class="contacts ">Contacts</div>
+  <div class="contacts" id="open-action-sheet">Contacts</div>
   <div class="contacts-list">
 
     <!-- <ion-grid>
       <ion-row *ngFor="let i of contacts">
-        <ion-col (click)="form.name = i.value">{{ i.label }}: {{i.value}}</ion-col>
+        <ion-col (click)="form.setValue({name:i.value})">{{ i.label }}: {{i.value}}</ion-col>
       </ion-row>
     </ion-grid> -->
+    <ion-action-sheet trigger="open-action-sheet" header="Contacts" [buttons]="actionSheetButtons"
+      (willDismiss)="form.setValue({name:$event.detail.data})"></ion-action-sheet>
   </div>
 
   <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!datavalid"

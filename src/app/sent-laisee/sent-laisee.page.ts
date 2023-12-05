@@ -1,5 +1,11 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-sent-laisee',
@@ -7,13 +13,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sent-laisee.page.scss'],
 })
 export class SentLaiseePage {
-  constructor(private locationStrategy: LocationStrategy) {}
-
+  constructor(
+    private locationStrategy: LocationStrategy,
+    private fb: FormBuilder
+  ) {}
+  form = this.fb.group({
+    name: ['', Validators.required],
+  });
   currentStep = 1;
   goBack() {
     this.locationStrategy.back();
   }
   nextStep(num: number) {
+    console.log('Form value changed:', this.form.get('name')?.value);
     if (this.currentStep + num > 4) {
       this.currentStep = 4;
     } else if (this.currentStep + num < 1) {
