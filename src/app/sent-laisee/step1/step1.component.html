@@ -13,12 +13,14 @@
     </ng-template>
   </ion-popover>
 
-  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
-      <input type="text" [(ngModel)]="form.name" (ngModelChange)="nameInput($event)" name="name" required
-        #name="ngModel" class="custom-input mb10" color="laisee" placeholder="Phone No., Payee Name, Email or FPS ID" />
-      <div *ngIf="name.invalid; else elseBlock" class="alert">
-        <ion-text [hidden]="name.valid || name.pristine" color="danger" class="error-text">Please enter a valid mobile
+      <div>{{form.status}}</div>
+      <input type="text" formControlName="name" required class="custom-input mb10 form-control" id="name" color="laisee"
+        placeholder="Phone No., Payee Name, Email or FPS ID" />
+      <div *ngIf="name?.errors; else elseBlock" class="alert">
+        <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="error-text">Please enter a valid mobile
           no. / email address /FPS ID/ Beneficiary
           Name</ion-text>
       </div>

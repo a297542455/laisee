@@ -1,14 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-step1',
   templateUrl: './step1.component.html',
   styleUrls: ['./step1.component.scss'],
 })
-export class Step1Component {
-  constructor() {}
+export class Step1Component implements OnInit {
+  constructor(private fb: FormBuilder) {}
 
-  form = { name: '' };
+  form = this.fb.group({
+    name: ['', Validators.required],
+  });
+
+  get name() {
+    return this.form.get('name');
+  }
+
+  ngOnInit() {
+    // 订阅表单值的变化
+    this.form.valueChanges.subscribe((value) => {
+      console.log('Form value changed:', value);
+      // 在这里可以执行你想要的逻辑
+      this.nameInput(value.name as string);
+    });
+  }
 
   contacts = [
     { value: '13333333333', label: 'Tina電話' },

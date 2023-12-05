@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -10,4 +11,8 @@ export class AppComponent {
     { title: 'folder/demo', url: '/folder/demo', icon: 'mail' },
   ];
   constructor() {}
+  profileForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
 }
