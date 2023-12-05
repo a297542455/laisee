@@ -17,7 +17,7 @@
     <div class="form-group">
       <input type="text" [(ngModel)]="form.name" (ngModelChange)="nameInput($event)" name="name" required
         #name="ngModel" class="custom-input mb10" color="laisee" placeholder="Phone No., Payee Name, Email or FPS ID" />
-      <div *ngIf="name.invalid && (name.dirty || name.touched); else elseBlock" class="alert">
+      <div *ngIf="name.invalid; else elseBlock" class="alert">
         <ion-text [hidden]="name.valid || name.pristine" color="danger" class="error-text">Please enter a valid mobile
           no. / email address /FPS ID/ Beneficiary
           Name</ion-text>
@@ -26,8 +26,8 @@
         <div class="sent-checkbox">
           <ion-grid>
             <ion-row>
-              <ion-col *ngFor="let item of checkboxOptions"><ion-checkbox labelPlacement="end"
-                  [checked]="item.checked">{{item.label}}</ion-checkbox></ion-col>
+              <ion-col *ngFor="let item of checkboxOptions"><ion-checkbox labelPlacement="end" [checked]="item.checked"
+                  disabled>{{item.label}}</ion-checkbox></ion-col>
             </ion-row>
           </ion-grid>
         </div>

@@ -60,6 +60,11 @@
   ion-item::part(native) {
     background-color: #fffff7;
     color: #da5173;
+
+    &::after {
+      background-color: #fffff7;
+      opacity: 0;
+    }
   }
   // 手風琴文字
   .sc-ion-label-ios-h {
@@ -72,6 +77,24 @@
     padding: 10px;
   }
 }
+
+// ion-item {
+//   --background: #19422d;
+//   --color: #fff;
+
+//   --border-color: #fff;
+//   --border-style: dashed;
+//   --border-width: 2px;
+
+//   --border-radius: 20px;
+
+//   --ripple-color: purple;
+
+//   --detail-icon-color: white;
+//   --detail-icon-opacity: 1;
+//   --detail-icon-font-size: 20px;
+// }
+// :host(.ion-activated) .item-native: :after {consbackground:var(--background-activated); opacity: var(--background-activated-opacity);:host(.离子激活).item-native::after {缺点背景:var(——background-activated);透明度:var(——background-activated-opacity);
 
 .remarks {
   display: flex;

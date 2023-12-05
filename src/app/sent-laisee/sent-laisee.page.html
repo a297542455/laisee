@@ -6,12 +6,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon name="close-outline" id="open-toast"></ion-icon>
-      <ion-toast
-        trigger="open-toast"
-        position="middle"
-        message="關閉，該提示3秒后消失"
-        [duration]="3000"
-      ></ion-toast>
+      <ion-toast trigger="open-toast" position="middle" message="關閉，該提示3秒后消失" [duration]="3000"></ion-toast>
     </ion-buttons>
     <ion-progress-bar [value]="currentStep/4" color="laisee"></ion-progress-bar>
   </ion-toolbar>
@@ -25,9 +20,10 @@
     <app-step4 [hidden]="currentStep !== 4"></app-step4>
   </ng-container>
 
+  <div>
+    demo展示，與本頁内容無關
+  </div>
   <ion-button (click)="nextStep(-1)" size="small">上一步</ion-button>
   <ion-button (click)="nextStep(1)" size="small">下一步</ion-button>
-  <ion-button [routerLink]="['/folder/demo']" size="small"
-    >Go to folder/demo</ion-button
-  >
+  <ion-button [routerLink]="['/folder/demo']" size="small">Go to folder/demo</ion-button>
 </ion-content>
