@@ -1,3 +1,33 @@
-<p>
-  step2 works!
-</p>
+<div class="header mb10">
+  <img src="assets/img/caishen.png" alt="" class="caishen" />
+</div>
+<div class="content">
+  <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
+    <div class="bold">Send 🧧 to</div>
+    <ion-icon slot="end" name="help-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding">文案解釋説明文案解釋説明文案解釋説明文案解釋説明文案解釋説明</ion-content>
+    </ng-template>
+  </ion-popover>
+
+  <div></div>
+
+
+  <form [formGroup]="form">
+    <div class="mb10 bold">FPS ID</div>
+    <div class="form-group">
+      <input type="text" formControlName="name" required class="custom-input mb10 form-control" />
+    </div>
+
+    <div class="mb10 bold">Payee Name</div>
+    <div class="mb10">{{form.get('payee')?.value}}</div>
+
+    <div class="mb10 bold">Beneficiary Bank</div>
+    <div class="form-group">
+      <input type="text" formControlName="bank" class="custom-input mb10 form-control"
+        placeholder="Default Receiving Bank" />
+    </div>
+  </form>
+</div>

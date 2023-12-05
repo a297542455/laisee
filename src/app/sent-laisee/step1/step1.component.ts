@@ -12,12 +12,10 @@ import {
   styleUrls: ['./step1.component.scss'],
 })
 export class Step1Component implements OnInit {
-  @Input() form: FormGroup;
+  @Input() form!: FormGroup;
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private fb: FormBuilder) {
-    this.form = new FormGroup({});
-  }
+  constructor() {}
 
   get name() {
     return this.form.get('name');

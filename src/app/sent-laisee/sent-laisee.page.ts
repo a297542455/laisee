@@ -13,14 +13,17 @@ import {
   styleUrls: ['./sent-laisee.page.scss'],
 })
 export class SentLaiseePage {
-  constructor(
-    private locationStrategy: LocationStrategy,
-    private fb: FormBuilder
-  ) {}
-  form = this.fb.group({
-    name: ['', Validators.required],
+  constructor(private locationStrategy: LocationStrategy) {}
+  form = new FormGroup({
+    // name: new FormControl(
+    //   { value: '123456789', disabled: true },
+    //   Validators.required
+    // ),
+    name: new FormControl('123456789', Validators.required),
+    payee: new FormControl(''),
+    bank: new FormControl(''),
   });
-  currentStep = 1;
+  currentStep = 2;
   goBack() {
     this.locationStrategy.back();
   }
