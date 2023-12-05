@@ -19,11 +19,11 @@ export class SentLaiseePage {
     //   { value: '123456789', disabled: true },
     //   Validators.required
     // ),
-    name: new FormControl('123456789', Validators.required),
+    name: new FormControl('999999992', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
   });
-  currentStep = 2;
+  currentStep = 1;
   goBack() {
     this.locationStrategy.back();
   }

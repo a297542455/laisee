@@ -43,11 +43,9 @@
     }
   }
 
-  .error-text {
-    font-size: 12px;
-  }
-
   .sent-checkbox {
+    display: flex;
+    justify-content: flex-start;
     ion-checkbox {
       --size: 24px;
       --checkbox-background-checked: #ce005a;
@@ -55,6 +53,10 @@
 
     ion-checkbox::part(container) {
       border: 1px solid #ce005a;
+    }
+
+    .checkbox-item {
+      flex: auto;
     }
   }
 
@@ -101,6 +103,14 @@
 
   .remarks {
     display: flex;
+  }
+
+  .font12 {
+    font-size: 12px;
+  }
+
+  .mb6 {
+    margin-bottom: 6px;
   }
 
   .mb10 {

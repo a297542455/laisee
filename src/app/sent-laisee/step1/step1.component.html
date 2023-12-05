@@ -16,45 +16,42 @@
 
   <form [formGroup]="form">
     <div class="form-group">
-      <input type="text" formControlName="name" required class="custom-input mb10 form-control" color="laisee"
+      <input type="text" formControlName="name" required class="custom-input form-control mb10" color="laisee"
         placeholder="Phone No., Payee Name, Email or FPS ID" />
+
+
       <div *ngIf="name?.errors; else elseBlock" class="alert">
-        <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="error-text">Please enter a valid mobile
+        <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="font12">Please enter a valid mobile
           no. / email address /FPS ID/ Beneficiary
           Name</ion-text>
       </div>
       <ng-template #elseBlock>
-        <div class="sent-checkbox">
-          <ion-grid>
-            <ion-row>
-              <ion-col *ngFor="let item of checkboxOptions"><ion-checkbox labelPlacement="end" [checked]="item.checked"
-                  disabled>{{item.label}}</ion-checkbox></ion-col>
-            </ion-row>
-          </ion-grid>
+        <div class="sent-checkbox ">
+          <div *ngFor="let item of checkboxOptions" class="checkbox-item"><ion-checkbox labelPlacement="end"
+              [checked]="item.checked" disabled>{{item.label}}</ion-checkbox></div>
         </div>
       </ng-template>
+
+      <!-- 提示文本，因爲設計圖 -->
+      <ion-button fill="clear" id="click-trigger" size="small" class="custom-button font12 mb20" disabled>
+        <ion-icon name="sunny-outline" color="laisee"></ion-icon>
+        For Phone No, include Country / Area Code
+      </ion-button>
     </div>
   </form>
 
-  <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10" disabled>
-    <ion-icon name="sunny-outline" color="laisee"></ion-icon>
-    For Phone No, include Country / Area Code
-  </ion-button>
 
   <div class="contacts" id="open-action-sheet">Contacts</div>
   <div class="contacts-list">
-
-    <!-- <ion-grid>
-      <ion-row *ngFor="let i of contacts">
-        <ion-col (click)="form.setValue({name:i.value})">{{ i.label }}: {{i.value}}</ion-col>
-      </ion-row>
-    </ion-grid> -->
     <ion-action-sheet trigger="open-action-sheet" header="Contacts" [buttons]="actionSheetButtons"
-      (willDismiss)="form.setValue({name:$event.detail.data})"></ion-action-sheet>
+      (willDismiss)="setValue($event)"></ion-action-sheet>
   </div>
 
   <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!datavalid"
-    (click)="nextStep.emit(1)">Next</ion-button>
+    (click)="goNext()">Next</ion-button>
 
+
+  <ion-toast [isOpen]="isToastOpen" message="沒有該用戶的信息！" color="danger" position="middle" [duration]="5000"
+    (didDismiss)="isToastOpen = false"></ion-toast>
 
 </div>

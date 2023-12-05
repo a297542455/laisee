@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SentLaiseeService } from './../../api/sent-laisee.service';
 import {
   FormGroup,
   FormControl,
@@ -15,26 +16,24 @@ export class Step1Component implements OnInit {
   @Input() form!: FormGroup;
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() {}
+  constructor(private service: SentLaiseeService) {}
 
   get name() {
     return this.form.get('name');
   }
   ngOnInit() {
+    this.form.get('name')?.enable();
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);
       // 在这里可以执行你想要的逻辑
       this.nameInput(value.name as string);
     });
+
+    this.nameInput(this.name?.value);
   }
 
-  contacts = [
-    { value: '13333333333', label: 'Tina電話' },
-    { value: '123@qq.com', label: 'Tina郵箱' },
-    { value: '888888888', label: 'Tina FPS' },
-  ];
-
+  // 聯係人選項
   actionSheetButtons = [
     {
       text: 'Tina電話: 13333333333',
@@ -49,11 +48,21 @@ export class Step1Component implements OnInit {
       data: '888888888',
     },
     {
+      text: '錯誤示範: 999999999',
+      data: '999999999',
+    },
+    {
       text: 'Cancel',
       role: 'cancel',
     },
   ];
 
+  // 聯係人選定
+  setValue(event: any) {
+    this.form.setValue({ ...this.form.value, name: event.detail.data });
+  }
+
+  // 輸入的信息判斷
   checkboxOptions = [
     { label: 'Mobile No', checked: false },
     { label: 'Email', checked: false },
@@ -85,5 +94,17 @@ export class Step1Component implements OnInit {
 
   get datavalid() {
     return this.checkboxOptions.some((item) => item.checked);
+  }
+
+  isToastOpen = false;
+  goNext() {
+    const name = this.form.get('name')?.value;
+    const data = this.service.getData(name);
+    if (data.name) {
+      this.form.setValue(data);
+      this.nextStep.emit(1);
+    } else {
+      this.isToastOpen = true;
+    }
   }
 }
