@@ -23,7 +23,12 @@ export class SentLaiseePage {
     payee: new FormControl(''),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
-    amount: new FormControl('20'),
+    amount: new FormControl('20', [
+      Validators.required,
+      Validators.min(0.01),
+      Validators.max(10000),
+      Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
+    ]),
   });
   currentStep = 3;
   goBack() {

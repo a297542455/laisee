@@ -1,5 +1,9 @@
 <div class="header mb10">
   <img src="assets/img/money.png" alt="" class="caishen" />
+  <div class="amountInPic font12">
+    <div>{{currency}}</div>
+    <div>{{amount?.value}}</div>
+  </div>
 </div>
 <div class="content">
   <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
@@ -14,31 +18,62 @@
 
   <form [formGroup]="form">
     <div class="mb6 bold">Amount per Laisee</div>
-    <div class="form-group mb20 flex">
+    <div class="form-group flex">
       <ion-select class="select-currency" aria-label="Favorite Fruit" formControlName="currency" interface="popover">
         <ion-select-option value="CNY">CNY</ion-select-option>
-        <ion-select-option value="US">US</ion-select-option>
-        <ion-select-option value="HK">HK</ion-select-option>
+        <ion-select-option value="USD">USD</ion-select-option>
+        <ion-select-option value="HKD">HKD</ion-select-option>
       </ion-select>
       <input type="text" formControlName="amount" required class="custom-input form-control" />
+
+    </div>
+    <div *ngIf="amount?.errors" class="alert error-text">
+      <ion-text [hidden]="amount?.valid || amount?.pristine" color="danger" class="font12">金額0.01 ~
+        10000,最多兩位小數</ion-text>
     </div>
 
-    <div class="myBtns">
+    <div class="myBtns flex ion-margin-top">
       <ion-button *ngFor="let value of btns; let i = index" (click)="btnClick(value, i)"
-        [class.btnCurrent]="i === btnCurrent" class="myBtn">
+        [class.btnCurrent]="i === btnCurrent" class="myBtn bold" [color]="i === btnCurrent? 'laisee':'light'"
+        size="small">
         {{ value }}
       </ion-button>
     </div>
 
-    <div class="myNums">
+    <div class="myNums ion-margin-bottom">
       <ion-button *ngFor="let value of myNums; let i = index" (click)="numClick(i)"
-        [class.numCurrent]="i === numCurrent" class="myNum">
-        {{ value }}
+        [class.numCurrent]="i === numCurrent" class="myNum" [color]="i === numCurrent? 'laisee':''">
+        <span>{{i === 0 ? '🧧' : '💕'}} {{ value }}</span>
       </ion-button>
     </div>
 
-    <div class="total">{{ total }}</div>
+    <div class="mb6 bold">Total Amount</div>
+    <div class="total bold ion-margin-bottom">{{currency}} {{ total }}</div>
+    <div class="font12 ion-margin-bottom">
+      <ion-text color="medium">Small-value Transfer Limit (Remaining Transfer Limit
+        Today: {{currency}}
+        10,000.00)</ion-text>
+    </div>
+
+    <div class="bold mb6">
+      Which account do you want to pay from?
+    </div>
+
+    <div class="account-box font12 flex ion-margin-bottom" id="open-action-sheet">
+      <div class="account-left">
+        <div class="singe-line">VIP i-Account Multi-Currency</div>
+        <div>Current Account</div>
+        <ion-text color="medium">{{123456789}}</ion-text>
+      </div>
+      <div class="account-right ion-text-end">
+        <ion-text color="medium" class="singe-line">Available Balance</ion-text>
+        <div><ion-icon name="create" color="laisee" class="account-icon"></ion-icon></div>
+        <div><ion-text color="medium" class="currency-text">{{currency}}</ion-text> {{transformAmount(123456)}}</div>
+      </div>
+    </div>
+
   </form>
 
-  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Next</ion-button>
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!form.valid"
+    (click)="goNext()">Next</ion-button>
 </div>

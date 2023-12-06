@@ -11,6 +11,12 @@ const defaultValue = {
   amount: '20',
 };
 
+const accounts = [
+  { id: 111111111, CNY: 11100, HKD: 11000, USD: 10000 },
+  { id: 222222222, CNY: 22200, HKD: 22000, USD: 20000 },
+  { id: 333333333, CNY: 33300, HKD: 33000, USD: 30000 },
+];
+
 type Form = typeof defaultValue;
 
 @Injectable({

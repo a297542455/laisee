@@ -19,7 +19,6 @@
       <input type="text" formControlName="name" required class="custom-input form-control mb10" color="laisee"
         placeholder="Phone No., Payee Name, Email or FPS ID" />
 
-
       <div *ngIf="name?.errors; else elseBlock" class="alert">
         <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="font12">Please enter a valid mobile
           no. / email address /FPS ID/ Beneficiary
@@ -32,8 +31,8 @@
         </div>
       </ng-template>
 
-      <!-- 提示文本，因爲設計圖 -->
-      <ion-button fill="clear" id="click-trigger" size="small" class="custom-button font12 mb20" disabled>
+      <!-- 提示文本，因爲設計圖不完全一致，暫時按這個風格 -->
+      <ion-button fill="clear" id="click-trigger" size="small" class="custom-button font12 ion-margin-bottom" disabled>
         <ion-icon name="sunny-outline" color="laisee"></ion-icon>
         For Phone No, include Country / Area Code
       </ion-button>

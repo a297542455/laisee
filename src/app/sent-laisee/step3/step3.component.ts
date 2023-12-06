@@ -31,8 +31,28 @@ export class Step3Component implements OnInit {
     this.numCurrent = index;
   }
 
+  get amount() {
+    return this.form.get('amount');
+  }
+  get currency() {
+    return this.form.get('currency')?.value;
+  }
+
   get total() {
-    return (this.numCurrent + 1) * Number(this.form.get('amount'));
+    return (
+      (this.numCurrent + 1) *
+      Number(this.form.get('amount')?.value)
+    ).toFixed(2);
+  }
+
+  // 金額格式化
+  transformAmount(amount: number): string {
+    // 将数字转为字符串，并且保留两位小数
+    const formattedAmount = Number(amount).toFixed(2);
+
+    // 使用正则表达式添加千位分隔符
+    const regex = /\B(?=(\d{3})+(?!\d))/g;
+    return formattedAmount.replace(regex, ',');
   }
 
   constructor(private service: SentLaiseeService) {}
@@ -42,7 +62,9 @@ export class Step3Component implements OnInit {
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);
 
-      this.btnCurrent = this.btns.indexOf(Number(this.form.get('amount')));
+      this.btnCurrent = this.btns.indexOf(
+        Number(this.form.get('amount')?.value)
+      );
       // 在这里可以执行你想要的逻辑
     });
   }

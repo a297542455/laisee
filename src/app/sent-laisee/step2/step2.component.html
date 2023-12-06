@@ -14,19 +14,19 @@
 
   <form [formGroup]="form">
     <div class="mb6 bold">FPS ID</div>
-    <div class="form-group mb20">
+    <div class="form-group ion-margin-bottom">
       <input type="text" formControlName="name" required class="custom-input  form-control" />
     </div>
 
     <div class="mb6 bold">Payee Name</div>
-    <div class="mb20">{{form.get('payee')?.value}}</div>
+    <div class="ion-margin-bottom">{{form.get('payee')?.value}}</div>
 
     <div class="mb6 bold">Beneficiary Bank</div>
     <div class="form-group ">
       <input type="text" formControlName="bank" class="custom-input  form-control"
         placeholder="Default Receiving Bank" />
     </div>
-    <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb20 font12" disabled>
+    <ion-button fill="clear" id="click-trigger" size="small" class="custom-button ion-margin-bottom font12" disabled>
       <ion-icon name="sunny-outline" color="laisee"></ion-icon>
       The fund transfer instruction will be executed in real time.
     </ion-button>
