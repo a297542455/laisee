@@ -1,3 +1,44 @@
-<p>
-  step3 works!
-</p>
+<div class="header mb10">
+  <img src="assets/img/money.png" alt="" class="caishen" />
+</div>
+<div class="content">
+  <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
+    <div class="bold">Laisee Details</div>
+    <ion-icon slot="end" name="help-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding">文案解釋説明文案解釋説明文案解釋説明文案解釋説明文案解釋説明</ion-content>
+    </ng-template>
+  </ion-popover>
+
+  <form [formGroup]="form">
+    <div class="mb6 bold">Amount per Laisee</div>
+    <div class="form-group mb20 flex">
+      <ion-select class="select-currency" aria-label="Favorite Fruit" formControlName="currency" interface="popover">
+        <ion-select-option value="CNY">CNY</ion-select-option>
+        <ion-select-option value="US">US</ion-select-option>
+        <ion-select-option value="HK">HK</ion-select-option>
+      </ion-select>
+      <input type="text" formControlName="amount" required class="custom-input form-control" />
+    </div>
+
+    <div class="myBtns">
+      <ion-button *ngFor="let value of btns; let i = index" (click)="btnClick(value, i)"
+        [class.btnCurrent]="i === btnCurrent" class="myBtn">
+        {{ value }}
+      </ion-button>
+    </div>
+
+    <div class="myNums">
+      <ion-button *ngFor="let value of myNums; let i = index" (click)="numClick(i)"
+        [class.numCurrent]="i === numCurrent" class="myNum">
+        {{ value }}
+      </ion-button>
+    </div>
+
+    <div class="total">{{ total }}</div>
+  </form>
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Next</ion-button>
+</div>

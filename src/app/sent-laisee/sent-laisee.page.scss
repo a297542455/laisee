@@ -6,17 +6,13 @@
       cover;
   }
 
-  .bold {
-    font-weight: bold;
-  }
-
   .header {
     position: relative;
-    height: 180px;
+    height: 220px;
   }
   .caishen {
     position: absolute;
-    width: 205px;
+    width: 240px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -31,10 +27,11 @@
 
   .custom-input {
     width: 100%;
+    height: 34px;
     border: 1px solid #999;
     border-radius: 4px;
     background-color: #ffefef;
-    padding: 6px 8px;
+    padding: 4px 8px;
     font-size: 14px;
 
     &[disabled] {
@@ -101,8 +98,27 @@
 
   // step2 - css
 
-  .remarks {
+  // step3 - css
+  .select-currency {
+    width: 100px;
+    background: #fff7f7;
+    padding: 0px 8px;
+    margin-right: 10px;
+  }
+
+  .myBtn {
+    --border-radius: 4px;
+  }
+  .myNum {
+  }
+
+  .flex {
     display: flex;
+    align-items: center;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 
   .font12 {

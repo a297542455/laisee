@@ -22,8 +22,10 @@ export class SentLaiseePage {
     name: new FormControl('999999992', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
+    currency: new FormControl('CNY'),
+    amount: new FormControl('20'),
   });
-  currentStep = 1;
+  currentStep = 3;
   goBack() {
     this.locationStrategy.back();
   }
