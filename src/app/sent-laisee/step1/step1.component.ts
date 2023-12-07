@@ -58,7 +58,9 @@ export class Step1Component implements OnInit {
 
   // 聯係人選定
   setValue(event: any) {
-    this.form.setValue({ ...this.form.value, name: event.detail.data });
+    if (event.detail.data) {
+      this.form.patchValue({ name: event.detail.data });
+    }
   }
 
   // 輸入的信息判斷
