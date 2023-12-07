@@ -17,8 +17,8 @@
       <div>{{amount?.value}}</div>
     </div>
   </ng-template>
-
 </div>
+
 <div class="content">
   <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
     <div class="bold">Laisee Details</div>
@@ -77,13 +77,19 @@
       <div class="account-left">
         <div class="singe-line">VIP i-Account Multi-Currency</div>
         <div>Current Account</div>
-        <ion-text color="medium">{{123456789}}</ion-text>
+        <ion-text color="medium">{{currentAccount.id}}</ion-text>
       </div>
       <div class="account-right ion-text-end">
         <ion-text color="medium" class="singe-line">Available Balance</ion-text>
         <div><ion-icon name="create" color="laisee" class="account-icon"></ion-icon></div>
-        <div><ion-text color="medium" class="currency-text">{{currency}}</ion-text> {{transformAmount(123456)}}</div>
+        <div><ion-text color="medium" class="currency-text">{{currency}}</ion-text>
+          {{transformAmount(currentAccount[currency])}}</div>
       </div>
+    </div>
+
+    <div class="contacts-list">
+      <ion-action-sheet trigger="open-action-sheet" header="Contacts" [buttons]="actionSheetButtons"
+        (willDismiss)="setValue($event)"></ion-action-sheet>
     </div>
 
   </form>

@@ -1,4 +1,4 @@
-import { SentLaiseeService } from './../../api/sent-laisee.service';
+import { Accounts, SentLaiseeService } from './../../api/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
@@ -7,6 +7,17 @@ import {
   FormBuilder,
 } from '@angular/forms';
 
+type Account = {
+  id: number;
+  CNY: number;
+  HKD: number;
+  USD: number;
+};
+type ActionSheetButtons = {
+  text: string;
+  role?: string;
+  data?: Account;
+}[];
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -34,7 +45,7 @@ export class Step3Component implements OnInit {
   get amount() {
     return this.form.get('amount');
   }
-  get currency() {
+  get currency(): keyof Account {
     return this.form.get('currency')?.value;
   }
 
@@ -55,8 +66,40 @@ export class Step3Component implements OnInit {
     return formattedAmount.replace(regex, ',');
   }
 
+  // 賬號選項
+  actionSheetButtons!: ActionSheetButtons;
+  currentAccount!: Account;
+
+  // 賬號選定
+  setValue(event: any) {
+    console.log('event.detail.data -----> ', event.detail.data);
+    if (event.detail.data) {
+      this.currentAccount = event.detail.data;
+      this.form.setValue({
+        ...this.form.value,
+        account: event.detail.data.id,
+      });
+    }
+  }
+
+  getAcount() {
+    let arr = this.service.getAccounts(this.form.get('name')?.value);
+    this.currentAccount = arr[0];
+
+    const actionSheetButtons: ActionSheetButtons = arr.map((item) => ({
+      text: String(item.id),
+      data: item,
+    }));
+    actionSheetButtons.push({
+      text: 'Cancel',
+      role: 'cancel',
+    });
+    this.actionSheetButtons = actionSheetButtons;
+  }
+
   constructor(private service: SentLaiseeService) {}
   ngOnInit() {
+    this.getAcount();
     console.log('this.form', this.form.value);
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {

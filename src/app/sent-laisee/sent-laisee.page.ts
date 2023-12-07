@@ -29,6 +29,7 @@ export class SentLaiseePage {
       Validators.max(10000),
       Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
     ]),
+    account: new FormControl(''),
   });
   currentStep = 3;
   goBack() {
