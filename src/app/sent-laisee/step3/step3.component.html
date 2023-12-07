@@ -1,12 +1,12 @@
 <div class="header mb10">
-  <ng-template [ngIf]="count===1" [ngIfElse]="otherTemplate">
+  <div [hidden]="count===2">
     <img src="assets/img/single.png" alt="" class="caishen " />
     <div class="single amountInPic font12">
       <div>{{currency}}</div>
       <div>{{amount?.value}}</div>
     </div>
-  </ng-template>
-  <ng-template #otherTemplate>
+  </div>
+  <div [hidden]="count===1">
     <img src="assets/img/double.png" alt="" class="caishen " />
     <div class="double amountInPic font12">
       <div>{{currency}}</div>
@@ -16,7 +16,7 @@
       <div>{{currency}}</div>
       <div>{{amount?.value}}</div>
     </div>
-  </ng-template>
+  </div>
 </div>
 
 <div class="content">
