@@ -18,6 +18,7 @@ export class Step2Component implements OnInit {
 
   constructor(private service: SentLaiseeService) {}
   ngOnInit() {
+    // 當前頁面禁止輸入id，下一個頁面記得要恢復
     this.form.get('name')?.disable();
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {

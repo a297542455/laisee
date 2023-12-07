@@ -14,11 +14,8 @@ import {
 })
 export class SentLaiseePage {
   constructor(private locationStrategy: LocationStrategy) {}
+  // 這個表單數據在全 sent-laisee 公用
   form = new FormGroup({
-    // name: new FormControl(
-    //   { value: '123456789', disabled: true },
-    //   Validators.required
-    // ),
     name: new FormControl('999999992', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
@@ -31,13 +28,12 @@ export class SentLaiseePage {
     ]),
     account: new FormControl(''),
   });
-  currentStep = 3;
+  currentStep = 1;
   goBack() {
     // this.locationStrategy.back();
     this.nextStep(-1);
   }
   nextStep(num: number) {
-    console.log('Form value changed:', this.form.get('name')?.value);
     if (this.currentStep + num > 4) {
       this.currentStep = 4;
     } else if (this.currentStep + num < 1) {

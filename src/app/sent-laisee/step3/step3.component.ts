@@ -82,7 +82,7 @@ export class Step3Component implements OnInit {
     }
   }
 
-  getAcount() {
+  getAcounts() {
     let arr = this.service.getAccounts(this.form.get('name')?.value);
     this.currentAccount = arr[0];
 
@@ -99,16 +99,18 @@ export class Step3Component implements OnInit {
 
   constructor(private service: SentLaiseeService) {}
   ngOnInit() {
-    this.getAcount();
+    // 上一個頁面禁止輸入了，這裏要恢復
+    this.form.get('name')?.enable();
+    this.getAcounts();
     console.log('this.form', this.form.value);
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);
 
+      // 在这里可以执行你想要的逻辑
       this.btnCurrent = this.btns.indexOf(
         Number(this.form.get('amount')?.value)
       );
-      // 在这里可以执行你想要的逻辑
     });
   }
 

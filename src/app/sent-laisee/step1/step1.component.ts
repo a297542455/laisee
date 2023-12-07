@@ -23,14 +23,13 @@ export class Step1Component implements OnInit {
   }
   ngOnInit() {
     this.form.get('name')?.enable();
+    this.nameInput(this.name?.value);
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);
       // 在这里可以执行你想要的逻辑
-      this.nameInput(value.name as string);
+      this.nameInput(this.name?.value);
     });
-
-    this.nameInput(this.name?.value);
   }
 
   // 聯係人選項
@@ -70,6 +69,7 @@ export class Step1Component implements OnInit {
     // 可以根据需要添加更多选项
   ];
 
+  // 輸入内容正則匹配 - 郵箱，11位手機號碼，9位FPS ID
   nameInput(name: string) {
     const emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     const mobileReg = /^1[3-9]\d{9}$/;
