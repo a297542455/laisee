@@ -37,14 +37,15 @@
 
   .header {
     position: relative;
-    height: 220px;
+    height: 212px;
+    width: 100%;
+    left: 0;
+    top: 0;
   }
   .caishen {
-    position: absolute;
-    width: 240px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    height: 212px;
+    width: 100%;
+    object-fit: cover;
   }
 
   .custom-button {
@@ -132,11 +133,47 @@
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
     position: absolute;
-    width: 100px;
     line-height: 12px;
-    left: 124px;
-    top: 16px;
   }
+  // iPhone SE 等較小機型
+  .single {
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .double {
+    top: 14px;
+    left: 58.5%;
+    transform: translateX(-50%);
+  }
+  .double-rotate {
+    top: 22px;
+    left: 35%;
+    transform: translateX(-50%) rotate(-14deg);
+  }
+
+  /* 媒体查询 iPhone XR 等中等機型 */
+  @media (min-width: 390px) and (-webkit-device-pixel-ratio: 3) {
+    .single,
+    .double {
+      top: 15px;
+    }
+    .double-rotate {
+      top: 21.5px;
+    }
+  }
+
+  /* 媒体查询 iPhone 14 Pro Max 等大型機型 */
+  @media (min-width: 428px) and (-webkit-device-pixel-ratio: 3) {
+    .single,
+    .double {
+      top: 10px;
+    }
+    .double-rotate {
+      top: 18px;
+    }
+  }
+
   .select-currency {
     width: 80px;
     flex-shrink: 0;

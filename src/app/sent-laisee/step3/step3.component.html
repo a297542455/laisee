@@ -1,9 +1,23 @@
 <div class="header mb10">
-  <img src="assets/img/money.png" alt="" class="caishen" />
-  <div class="amountInPic font12">
-    <div>{{currency}}</div>
-    <div>{{amount?.value}}</div>
-  </div>
+  <ng-template [ngIf]="numCurrent===0" [ngIfElse]="noContentTemplate">
+    <img src="assets/img/single.png" alt="" class="caishen " />
+    <div class="single amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+  </ng-template>
+  <ng-template #noContentTemplate>
+    <img src="assets/img/double.png" alt="" class="caishen " />
+    <div class="double amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+    <div class="double-rotate amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+  </ng-template>
+
 </div>
 <div class="content">
   <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">

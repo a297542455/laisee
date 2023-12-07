@@ -20,7 +20,7 @@ export class Step3Component implements OnInit {
   btnCurrent = 0;
 
   myNums = ['Send one', 'Double up'];
-  numCurrent = 0;
+  numCurrent = 1;
 
   btnClick(amount: number, index: number) {
     this.form.setValue({ ...this.form.value, amount });

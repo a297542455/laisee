@@ -32,7 +32,8 @@ export class SentLaiseePage {
   });
   currentStep = 3;
   goBack() {
-    this.locationStrategy.back();
+    // this.locationStrategy.back();
+    this.nextStep(-1);
   }
   nextStep(num: number) {
     console.log('Form value changed:', this.form.get('name')?.value);
