@@ -253,9 +253,9 @@
     height: auto;
   }
 
-  // 提示文本往上移動，看上去就在 textarea 中一樣
   .tips-text {
-    margin-top: -24px;
+    // 提示文本往上移動，看上去就在 textarea 中一樣
+    // margin-top: -24px;
     margin-right: 8px;
     color: #ccc;
   }

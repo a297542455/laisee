@@ -11,7 +11,7 @@ const defaultValue = {
   amount: '20',
   count: 1,
   account: '',
-  blessing: '',
+  blessing: '🎉🎉恭喜發財利是逗來🧧🧧',
 };
 
 const accounts = [
