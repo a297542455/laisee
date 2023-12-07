@@ -11,7 +11,7 @@
   }
 
   .font12 {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 
   .mb6 {
@@ -138,7 +138,7 @@
   // iPhone SE 等較小機型
   .single {
     top: 14px;
-    left: 50%;
+    left: 50.5%;
     transform: translateX(-50%);
   }
   .double {
@@ -181,7 +181,7 @@
     padding: 0px 8px;
     margin-right: 10px;
   }
-  .error-text {
+  .error-in-input {
     margin-left: 90px;
   }
 
@@ -224,6 +224,51 @@
     }
     .account-right {
       flex: 1 1 40%;
+    }
+  }
+
+  // step4 css
+  // 紅包頂部樣式
+  .blessingInPic {
+    position: absolute;
+    width: 26%;
+    top: 20%;
+    // 圖片不是對稱的！！！
+    left: 49.5%;
+    transform: translateX(-50%);
+    background-color: var(--ion-color-laisee);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 12px;
+    padding: 4px;
+  }
+  .double-blessing {
+    left: 59%;
+    top: 21%;
+  }
+
+  // 輸入框樣式
+  .blessing {
+    height: auto;
+  }
+
+  // 提示文本往上移動，看上去就在 textarea 中一樣
+  .tips-text {
+    margin-top: -24px;
+    margin-right: 8px;
+    color: #ccc;
+  }
+
+  .emoji-flex {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    .emoji-item {
+      background-color: #fff;
+      font-size: 24px;
+      padding: 8px;
+      border-radius: 4px;
     }
   }
 }

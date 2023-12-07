@@ -26,7 +26,9 @@ export class SentLaiseePage {
       Validators.max(10000),
       Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
     ]),
+    count: new FormControl(1),
     account: new FormControl(''),
+    blessing: new FormControl('🎉🎉恭喜發財利是逗來🧧🧧'),
   });
   currentStep = 1;
   goBack() {

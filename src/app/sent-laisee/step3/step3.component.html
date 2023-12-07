@@ -1,5 +1,5 @@
 <div class="header mb10">
-  <ng-template [ngIf]="numCurrent===0" [ngIfElse]="otherTemplate">
+  <ng-template [ngIf]="count===1" [ngIfElse]="otherTemplate">
     <img src="assets/img/single.png" alt="" class="caishen " />
     <div class="single amountInPic font12">
       <div>{{currency}}</div>
@@ -41,7 +41,7 @@
       <input type="text" formControlName="amount" required class="custom-input form-control" />
 
     </div>
-    <div *ngIf="amount?.errors" class="alert error-text">
+    <div *ngIf="amount?.errors" class="alert error-in-input">
       <ion-text [hidden]="amount?.valid || amount?.pristine" color="danger" class="font12">金額0.01 ~
         10000,最多兩位小數</ion-text>
     </div>
@@ -55,8 +55,8 @@
     </div>
 
     <div class="myNums ion-margin-bottom">
-      <ion-button *ngFor="let value of myNums; let i = index" (click)="numClick(i)"
-        [class.numCurrent]="i === numCurrent" class="myNum" [color]="i === numCurrent? 'laisee':''">
+      <ion-button *ngFor="let value of myNums; let i = index" (click)="numClick(i)" class="myNum"
+        [color]="i === count-1? 'laisee':''">
         <span>{{i === 0 ? '🧧' : '💕'}} {{ value }}</span>
       </ion-button>
     </div>

@@ -9,7 +9,9 @@ const defaultValue = {
   bank: '大新銀行',
   currency: 'CNY',
   amount: '20',
+  count: 1,
   account: '',
+  blessing: '',
 };
 
 const accounts = [
@@ -18,6 +20,8 @@ const accounts = [
   { id: 333333333, CNY: 33300, HKD: 33000, USD: 30000 },
   { id: 444444444, CNY: 44400, HKD: 44000, USD: 40000 },
 ];
+
+const emojis = ['🧧', '🧨', '🍊', '🍾', '🎉', '🎊', '❤️', '🎃', '😊'];
 
 export type Form = typeof defaultValue;
 export type Accounts = typeof accounts;
@@ -37,5 +41,8 @@ export class SentLaiseeService {
   }
   getAccounts(name: string) {
     return accounts;
+  }
+  getEmojis() {
+    return emojis;
   }
 }

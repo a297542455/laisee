@@ -1,3 +1,48 @@
-<p>
-  step4 works!
-</p>
+<div class="header mb10">
+  <ng-template [ngIf]="count===1" [ngIfElse]="otherTemplate">
+    <img src="assets/img/single.png" alt="" class="caishen " />
+    <div class="single amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+    <div class="single-blessing blessingInPic font12">
+      {{blessing?.value}}
+    </div>
+  </ng-template>
+  <ng-template #otherTemplate>
+    <img src="assets/img/double.png" alt="" class="caishen " />
+    <div class="double amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+    <div class="double-rotate amountInPic font12">
+      <div>{{currency}}</div>
+      <div>{{amount?.value}}</div>
+    </div>
+    <div class="double-blessing blessingInPic font12">
+      {{blessing?.value}}
+    </div>
+  </ng-template>
+</div>
+
+<div class="content">
+  <form [formGroup]="form">
+    <div class="mb6 bold">Blessing (Optional)</div>
+    <div class="form-group">
+      <textarea rows="3" formControlName="blessing" [maxlength]="maxLength" (blur)="getIndex()"
+        class="custom-input blessing form-control" #inputElement></textarea>
+      <div class="tips-text ion-text-end font12">{{blessing?.value.length}}/{{maxLength}}</div>
+    </div>
+
+    <div *ngIf="blessing?.errors" class="alert">
+      <ion-text [hidden]="blessing?.valid || blessing?.pristine" color="danger" class="font12">Only supports Chinese,
+        English, numbers and below Emojis.</ion-text>
+    </div>
+
+    <div class="emoji-flex">
+      <div class="emoji-item" *ngFor="let emoji of emojis" (click)="emojiClick(emoji)">{{emoji}}</div>
+    </div>
+
+    <div class="mb6 bold ion-margin-top">Voice Blessing</div>
+  </form>
+</div>

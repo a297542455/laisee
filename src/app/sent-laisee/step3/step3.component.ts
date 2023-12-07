@@ -31,7 +31,6 @@ export class Step3Component implements OnInit {
   btnCurrent = 0;
 
   myNums = ['Send one', 'Double up'];
-  numCurrent = 1;
 
   btnClick(amount: number, index: number) {
     this.form.setValue({ ...this.form.value, amount });
@@ -39,20 +38,25 @@ export class Step3Component implements OnInit {
   }
 
   numClick(index: number) {
-    this.numCurrent = index;
+    this.form.setValue({ ...this.form.value, count: index + 1 });
   }
 
+  // 用作驗證，所以不要取值 value
   get amount() {
     return this.form.get('amount');
   }
+
+  get count() {
+    return this.form.get('count')?.value;
+  }
+
   get currency(): keyof Account {
     return this.form.get('currency')?.value;
   }
 
   get total() {
     return (
-      (this.numCurrent + 1) *
-      Number(this.form.get('amount')?.value)
+      this.form.get('count')?.value * Number(this.form.get('amount')?.value)
     ).toFixed(2);
   }
 
@@ -68,6 +72,7 @@ export class Step3Component implements OnInit {
 
   // 賬號選項
   actionSheetButtons!: ActionSheetButtons;
+  // 當前選中賬號數據
   currentAccount!: Account;
 
   // 賬號選定
