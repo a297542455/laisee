@@ -5,7 +5,7 @@
       <div>{{currency}}</div>
       <div>{{amount?.value}}</div>
     </div>
-    <div class="single-blessing blessingInPic font12">
+    <div class="single-blessing blessingInPic font12" *ngIf="blessing?.value">
       {{blessing?.value}}
     </div>
   </ng-template>

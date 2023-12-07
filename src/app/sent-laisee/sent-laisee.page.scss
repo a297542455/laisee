@@ -231,7 +231,8 @@
   // 紅包頂部樣式
   .blessingInPic {
     position: absolute;
-    width: 26%;
+    // 不要寫百分比，不同寬度會突破的
+    width: 88px;
     top: 20%;
     // 圖片不是對稱的！！！
     left: 49.5%;
