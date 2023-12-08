@@ -1,3 +1,4 @@
+import { emojis } from './../api/sent-laisee.service';
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -5,6 +6,9 @@ import {
   FormControl,
   Validators,
   FormBuilder,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 
 @Component({
@@ -28,9 +32,31 @@ export class SentLaiseePage {
     ]),
     count: new FormControl(1),
     account: new FormControl(''),
-    blessing: new FormControl('🎉🎉恭喜發財利是逗來🧧🧧'),
+    blessing: new FormControl('🎉🎉恭喜發財利是逗來🧧🧧', [
+      this.blessingValidator(),
+    ]),
   });
-  currentStep = 1;
+
+  // 祝福語校驗，目前僅支持 中英文，數字，和提供的emojis
+  blessingValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const str = control.value;
+      // 将表情符号数组转换成正则表达式的字符集
+      const emojiPattern = emojis.map((emoji) => `${emoji}`).join('|');
+
+      // 构造正则表达式
+      const regexPattern = new RegExp(
+        `^[\\u4e00-\\u9fa5a-zA-Z0-9${emojiPattern}]+$`
+      );
+
+      const isValid = regexPattern.test(str);
+
+      console.log('str -----> ', isValid, regexPattern);
+      return !isValid ? { blessing: { value: control.value } } : null;
+    };
+  }
+
+  currentStep = 4;
   goBack() {
     // this.locationStrategy.back();
     this.nextStep(-1);

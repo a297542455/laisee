@@ -21,7 +21,7 @@ const accounts = [
   { id: 444444444, CNY: 44400, HKD: 44000, USD: 40000 },
 ];
 
-const emojis = ['🧧', '🧨', '🍊', '🍾', '🎉', '🎊', '❤️', '🎃', '😊'];
+export const emojis = ['🧧', '🧨', '🍊', '🍾', '🎉', '🎊', '❤️', '🎃', '😊'];
 
 export type Form = typeof defaultValue;
 export type Accounts = typeof accounts;
