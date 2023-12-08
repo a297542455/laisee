@@ -1,4 +1,8 @@
-import { Accounts, SentLaiseeService } from './../../api/sent-laisee.service';
+import {
+  Account,
+  ActionSheetButtons,
+  SentLaiseeService,
+} from './../../api/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
@@ -7,17 +11,6 @@ import {
   FormBuilder,
 } from '@angular/forms';
 
-type Account = {
-  id: number;
-  CNY: number;
-  HKD: number;
-  USD: number;
-};
-type ActionSheetButtons = {
-  text: string;
-  role?: string;
-  data?: Account;
-}[];
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -71,7 +64,7 @@ export class Step3Component implements OnInit {
   }
 
   // 賬號選項
-  actionSheetButtons!: ActionSheetButtons;
+  actionSheetButtons!: ActionSheetButtons<Account>;
   // 當前選中賬號數據
   currentAccount!: Account;
 
@@ -87,11 +80,11 @@ export class Step3Component implements OnInit {
     }
   }
 
-  getAcounts() {
+  getAccounts() {
     let arr = this.service.getAccounts(this.form.get('name')?.value);
     this.currentAccount = arr[0];
 
-    const actionSheetButtons: ActionSheetButtons = arr.map((item) => ({
+    const actionSheetButtons: ActionSheetButtons<Account> = arr.map((item) => ({
       text: String(item.id),
       data: item,
     }));
@@ -106,7 +99,7 @@ export class Step3Component implements OnInit {
   ngOnInit() {
     // 上一個頁面禁止輸入了，這裏要恢復
     this.form.get('name')?.enable();
-    this.getAcounts();
+    this.getAccounts();
     console.log('this.form', this.form.value);
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {

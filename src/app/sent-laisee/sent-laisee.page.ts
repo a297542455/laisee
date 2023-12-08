@@ -58,7 +58,7 @@ export class SentLaiseePage {
 
   // 按照UI圖3步設計，前端頁面不好劃分
   // 目前每個步驟分一個step，再用 step 設置進度progress
-  currentStep = 4;
+  currentStep = 1;
   get progress() {
     if (this.currentStep <= 4) {
       return 1;

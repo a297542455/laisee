@@ -21,23 +21,63 @@ const accounts = [
   { id: 444444444, CNY: 44400, HKD: 44000, USD: 40000 },
 ];
 
+// 聯係人選項
+const contacts = [
+  {
+    id: '13333333333',
+    text: 'Tina電話: 13333333333',
+  },
+  {
+    id: '123@qq.com',
+    text: 'Tina郵箱: 123@qq.com',
+  },
+  {
+    id: '888888888',
+    text: 'Tina FPS: 888888888',
+  },
+  {
+    id: '999999999',
+    text: '錯誤示範: 999999999',
+  },
+];
+
 export const emojis = ['🧧', '🧨', '🍊', '🍾', '🎉', '🎊', '❤️', '🎃', '😊'];
 
 export type Form = typeof defaultValue;
-export type Accounts = typeof accounts;
+
+export type Contact = {
+  id: string;
+  text: string;
+};
+
+export type Account = {
+  id: number;
+  CNY: number;
+  HKD: number;
+  USD: number;
+};
+
+export type ActionSheetButtons<T> = {
+  text: string | number;
+  role?: string;
+  data?: T;
+}[];
 
 @Injectable({
   providedIn: 'root',
 })
 export class SentLaiseeService {
   constructor(private http: HttpClient) {}
-  // 999999999 模擬錯誤信息，包括step1的id錯誤，step3的id獲取賬號列表等
+  // 999999999 模擬錯誤信息
   getData(name: string): Form {
     console.log('getData -----> ', name);
     if (name == '999999999') {
       return defaultValue;
     }
     return { ...defaultValue, name };
+  }
+  getContacts(name: string) {
+    return contacts;
   }
   getAccounts(name: string) {
     return accounts;

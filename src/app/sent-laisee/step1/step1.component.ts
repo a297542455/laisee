@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SentLaiseeService } from './../../api/sent-laisee.service';
+import {
+  ActionSheetButtons,
+  Contact,
+  SentLaiseeService,
+} from './../../api/sent-laisee.service';
 import {
   FormGroup,
   FormControl,
@@ -22,6 +26,7 @@ export class Step1Component implements OnInit {
     return this.form.get('name');
   }
   ngOnInit() {
+    this.getContacts();
     this.form.get('name')?.enable();
     this.nameInput(this.name?.value);
     // 订阅表单值的变化
@@ -33,33 +38,26 @@ export class Step1Component implements OnInit {
   }
 
   // 聯係人選項
-  actionSheetButtons = [
-    {
-      text: 'Tina電話: 13333333333',
-      data: '13333333333',
-    },
-    {
-      text: 'Tina郵箱: 123@qq.com',
-      data: '123@qq.com',
-    },
-    {
-      text: 'Tina FPS: 888888888',
-      data: '888888888',
-    },
-    {
-      text: '錯誤示範: 999999999',
-      data: '999999999',
-    },
-    {
+  actionSheetButtons!: ActionSheetButtons<Contact>;
+
+  getContacts() {
+    let arr = this.service.getContacts(this.form.get('name')?.value);
+
+    const actionSheetButtons: ActionSheetButtons<Contact> = arr.map((item) => ({
+      text: String(item.id),
+      data: item,
+    }));
+    actionSheetButtons.push({
       text: 'Cancel',
       role: 'cancel',
-    },
-  ];
+    });
+    this.actionSheetButtons = actionSheetButtons;
+  }
 
   // 聯係人選定
   setValue(event: any) {
     if (event.detail.data) {
-      this.form.patchValue({ name: event.detail.data });
+      this.form.patchValue({ name: event.detail.data.id });
     }
   }
 
