@@ -9,7 +9,8 @@
   </div>
   <div class="btn ion-padding" *ngIf="isOk">
     <span (click)="initStatus()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
-    <span (click)="play()"><span>{{ countFormat }}︎ </span> <span> |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
+    <span (click)="play()"><span class="countFormat">{{ countFormat }}︎ </span> <span>
+        |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
     <ion-icon name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
 
   </div>
