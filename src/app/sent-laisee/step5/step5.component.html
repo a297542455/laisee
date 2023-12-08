@@ -10,7 +10,10 @@
   </ion-popover>
 
   <form [formGroup]="form">
-
+    <div class="fullWidth ion-text-center" *ngIf="blessing">
+      <div class="blessing-title">Blessing</div>
+      <div>{{blessing}}</div>
+    </div>
   </form>
 
   <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Next</ion-button>

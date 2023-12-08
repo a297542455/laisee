@@ -75,11 +75,11 @@
     justify-content: flex-start;
     ion-checkbox {
       --size: 24px;
-      --checkbox-background-checked: #ce005a;
+      --checkbox-background-checked: var(--ion-color-laisee);
     }
 
     ion-checkbox::part(container) {
-      border: 1px solid #ce005a;
+      border: 1px solid var(--ion-color-laisee);
     }
 
     .checkbox-item {
@@ -88,7 +88,7 @@
   }
 
   .contacts {
-    background-color: #ce005a;
+    background-color: var(--ion-color-laisee);
     margin: 0 -16px;
     padding: 8px 16px;
     color: #fff;
@@ -272,5 +272,17 @@
       padding: 8px;
       border-radius: 4px;
     }
+  }
+
+  // step5 css
+  .fullWidth {
+    background-color: var(--ion-color-laisee);
+    margin: 0 -16px;
+    padding: 8px 16px;
+    color: #fff;
+    line-height: 30px;
+  }
+  .blessing-title {
+    opacity: 0.4;
   }
 }

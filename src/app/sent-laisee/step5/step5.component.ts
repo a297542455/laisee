@@ -28,4 +28,8 @@ export class Step5Component implements OnInit {
   goNext() {
     this.nextStep.emit(1);
   }
+
+  get blessing() {
+    return this.form.get('blessing')?.value;
+  }
 }

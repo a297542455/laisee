@@ -99,9 +99,6 @@ export class Step3Component implements OnInit {
     // 獲取聯係人列表
     this.getAccounts();
 
-    // 上一個頁面禁止輸入了，這裏要恢復
-    this.form.get('name')?.enable();
-
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);

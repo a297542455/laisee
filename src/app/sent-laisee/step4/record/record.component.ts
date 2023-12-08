@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -14,7 +15,7 @@ import { fromEvent } from 'rxjs';
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss'],
 })
-export class RecordComponent implements OnInit, AfterViewInit {
+export class RecordComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() defaultText: string = '長按錄音(最長1分鐘)';
   @Input() recordingText: string = '滑動取消<';
   @Input() swipeText: string = '鬆開手指 取消發送';
@@ -123,6 +124,10 @@ export class RecordComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.btnAddEvent();
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.countTimer);
   }
 
   get countFormat() {
