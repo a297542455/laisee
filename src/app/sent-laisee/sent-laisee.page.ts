@@ -32,7 +32,7 @@ export class SentLaiseePage {
     ]),
     count: new FormControl(1),
     account: new FormControl(''),
-    blessing: new FormControl('🎉🎉恭喜發財利是逗來🧧🧧', [
+    blessing: new FormControl('恭喜發財利是逗來🧧🧧', [
       this.blessingValidator(),
     ]),
   });

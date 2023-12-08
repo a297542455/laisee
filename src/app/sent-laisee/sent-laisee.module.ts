@@ -11,6 +11,7 @@ import { Step1Component } from './step1/step1.component';
 import { Step2Component } from './step2/step2.component';
 import { Step3Component } from './step3/step3.component';
 import { Step4Component } from './step4/step4.component';
+import { RecordComponent } from './step4/record/record.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { Step4Component } from './step4/step4.component';
     Step2Component,
     Step3Component,
     Step4Component,
+    RecordComponent,
   ],
 })
 export class SentLaiseePageModule {}
