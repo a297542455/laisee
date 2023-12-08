@@ -41,6 +41,8 @@ export class SentLaiseePage {
   blessingValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const str = control.value;
+      // 允許爲空
+      if (!str) return null;
       // 将表情符号数组转换成正则表达式的字符集
       const emojiPattern = emojis.map((emoji) => `${emoji}`).join('|');
 
