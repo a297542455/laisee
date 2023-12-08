@@ -1,6 +1,6 @@
 import { emojis } from './../api/sent-laisee.service';
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -10,6 +10,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-sent-laisee',
@@ -17,10 +18,12 @@ import {
   styleUrls: ['./sent-laisee.page.scss'],
 })
 export class SentLaiseePage {
+  @ViewChild(IonContent) content!: IonContent;
   constructor(private locationStrategy: LocationStrategy) {}
+
   // 這個表單數據在全 sent-laisee 公用
   form = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('888888888', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
@@ -58,7 +61,7 @@ export class SentLaiseePage {
 
   // 按照UI圖3步設計，前端頁面不好劃分
   // 目前每個步驟分一個step，再用 step 設置進度progress
-  currentStep = 1;
+  currentStep = 5;
   get progress() {
     if (this.currentStep <= 4) {
       return 1;
@@ -79,6 +82,7 @@ export class SentLaiseePage {
       this.currentStep = 1;
     } else {
       this.currentStep += num;
+      this.content.scrollToTop();
     }
   }
 }
