@@ -21,7 +21,6 @@ export class RecordComponent implements OnInit, AfterViewInit {
   @Input() overtimeText: string = '方便測試，超過10秒停止';
   @ViewChild('btnRecording') btnRecording!: ElementRef;
   // 提示文本
-
   text = '';
   // 录音时间
   count = 0;
@@ -35,9 +34,13 @@ export class RecordComponent implements OnInit, AfterViewInit {
   // 錄音成功
   isOk = false;
 
+  // active 標識
+  active = false;
+
   btnAddEvent() {
     // // 统计录音时长
     var startCountTime = () => {
+      this.active = true;
       this.countTimer = window.setInterval(() => {
         this.count++;
         if (this.count > this.maxCount) {
@@ -53,13 +56,13 @@ export class RecordComponent implements OnInit, AfterViewInit {
     var endCountTime = () => {
       window.clearInterval(this.countTimer);
       this.countTimer = 0;
+      this.active = false;
     };
 
     const element = this.btnRecording.nativeElement;
 
     fromEvent<TouchEvent>(element, 'touchstart').subscribe(
       (event: TouchEvent) => {
-        event.preventDefault(); //阻止浏览器默认行为
         this.posStart = 0;
         this.posStart = event.touches[0].pageX; //获取起点坐标
 
@@ -72,8 +75,6 @@ export class RecordComponent implements OnInit, AfterViewInit {
 
     fromEvent<TouchEvent>(element, 'touchmove').subscribe(
       (event: TouchEvent) => {
-        event.preventDefault(); //阻止浏览器默认行为
-
         this.posMove = event.targetTouches[0].pageX; //获取滑动实时坐标
 
         if (this.posStart - this.posMove < 100) {
@@ -86,7 +87,6 @@ export class RecordComponent implements OnInit, AfterViewInit {
 
     fromEvent<TouchEvent>(element, 'touchend').subscribe(
       (event: TouchEvent) => {
-        event.preventDefault(); //阻止浏览器默认行为
         if (this.count < 1) {
           alert('錄音時間太短');
           this.initStatus();
@@ -110,6 +110,7 @@ export class RecordComponent implements OnInit, AfterViewInit {
     this.text = this.defaultText;
     this.count = 0;
     this.isOk = false;
+    this.active = false;
   }
 
   play() {
