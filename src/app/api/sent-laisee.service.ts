@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 const defaultValue = {
   name: '',
   payee: '模擬數據**',
-  bank: '大新銀行',
+  bank: '模擬銀行',
   currency: 'CNY',
   amount: '20',
   count: 1,
