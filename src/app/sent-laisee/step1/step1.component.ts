@@ -44,7 +44,7 @@ export class Step1Component implements OnInit {
     let arr = this.service.getContacts(this.form.get('name')?.value);
 
     const actionSheetButtons: ActionSheetButtons<Contact> = arr.map((item) => ({
-      text: String(item.id),
+      text: item.text,
       data: item,
     }));
     actionSheetButtons.push({
