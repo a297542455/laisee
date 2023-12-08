@@ -25,19 +25,21 @@ const accounts = [
 const contacts = [
   {
     id: '13333333333',
-    text: 'Tina電話: 13333333333',
+    mobile: '13333333333',
+    Email: '13333333333@a.com',
+    FPSID: '333333333',
   },
   {
-    id: '123@qq.com',
-    text: 'Tina郵箱: 123@qq.com',
+    id: '188@a.com',
+    mobile: '18888888888',
+    Email: '188@a.com',
+    FPSID: '88888888',
   },
   {
-    id: '888888888',
-    text: 'Tina FPS: 888888888',
-  },
-  {
-    id: '999999999',
-    text: '錯誤示範: 999999999',
+    id: '666666666',
+    mobile: '16666666666',
+    Email: '16666666666@a.com',
+    FPSID: '666666666',
   },
 ];
 
@@ -47,7 +49,9 @@ export type Form = typeof defaultValue;
 
 export type Contact = {
   id: string;
-  text: string;
+  mobile?: string;
+  Email?: string;
+  FPSID?: string;
 };
 
 export type Account = {

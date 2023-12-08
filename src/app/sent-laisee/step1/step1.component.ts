@@ -44,9 +44,13 @@ export class Step1Component implements OnInit {
     let arr = this.service.getContacts(this.form.get('name')?.value);
 
     const actionSheetButtons: ActionSheetButtons<Contact> = arr.map((item) => ({
-      text: item.text,
+      text: '模擬：' + item.id,
       data: item,
     }));
+    actionSheetButtons.push({
+      text: '錯誤：999999999',
+      data: { id: '999999999' },
+    });
     actionSheetButtons.push({
       text: 'Cancel',
       role: 'cancel',

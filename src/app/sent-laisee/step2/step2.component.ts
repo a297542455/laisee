@@ -34,6 +34,22 @@ export class Step2Component implements OnInit, OnDestroy {
     });
   }
 
+  get name() {
+    return this.form.get('name')?.value;
+  }
+
+  // 根據當前 id 簡單判斷
+  get idType() {
+    const name = this.name;
+    if (name.includes('@')) {
+      return 'Email';
+    } else if (name.length === 11) {
+      return 'Mobile';
+    } else {
+      return 'FPS ID';
+    }
+  }
+
   ngOnDestroy() {
     // 離開頁面要恢復
     this.form.get('name')?.enable();
