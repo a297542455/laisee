@@ -43,9 +43,14 @@
       <div class="emoji-item" *ngFor="let emoji of emojis" (click)="emojiClick(emoji)">{{emoji}}</div>
     </div>
 
-    <div class="mb6 bold ion-margin-top">Voice Blessing</div>
+    <div class="mb10 bold ion-margin-top">Voice Blessing</div>
     <div class="ion-margin-bottom">
+      <!-- 錄音組件 -->
       <app-record></app-record>
     </div>
   </form>
+
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!form.valid"
+    (click)="goNext()">Proceed</ion-button>
 </div>

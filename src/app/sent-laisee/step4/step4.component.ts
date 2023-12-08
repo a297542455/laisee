@@ -93,23 +93,7 @@ export class Step4Component implements OnInit {
     this.index += emoji.length;
   }
 
-  // 錄音
-  onTouchStart(event: TouchEvent) {
-    console.log('Touch start:', event);
-    // 处理 touchstart 事件的逻辑
-  }
-
-  onTouchMove(event: TouchEvent) {
-    console.log('Touch move:', event);
-    // 处理 touchmove 事件的逻辑
-  }
-
-  onTouchEnd(event: TouchEvent) {
-    console.log('Touch end:', event);
-    // 处理 touchend 事件的逻辑
-  }
-
-  proceed() {
+  goNext() {
     this.nextStep.emit(1);
   }
 }

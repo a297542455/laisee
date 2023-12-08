@@ -8,12 +8,18 @@
       <ion-icon name="close-outline" id="open-toast"></ion-icon>
       <ion-toast trigger="open-toast" position="middle" message="關閉，該提示3秒后消失" [duration]="3000"></ion-toast>
     </ion-buttons>
-    <ion-progress-bar [value]="currentStep/4" color="laisee"></ion-progress-bar>
+    <ion-progress-bar [value]="progress/3" color="laisee"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ng-container>
+    <!--
+      按照UI圖3步設計，前端頁面不好劃分
+      1-4 是 progress1
+      5 是 progress2
+      6 是 progress3
+    -->
     <app-step1 *ngIf="currentStep === 1" (nextStep)="nextStep($event)" [form]="form"></app-step1>
     <app-step2 *ngIf="currentStep === 2" (nextStep)="nextStep($event)" [form]="form"></app-step2>
     <app-step3 *ngIf="currentStep === 3" (nextStep)="nextStep($event)" [form]="form"></app-step3>

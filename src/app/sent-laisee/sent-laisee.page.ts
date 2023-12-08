@@ -56,14 +56,25 @@ export class SentLaiseePage {
     };
   }
 
+  // 按照UI圖3步設計，前端頁面不好劃分
+  // 目前每個步驟分一個step，再用 step 設置進度progress
   currentStep = 4;
+  get progress() {
+    if (this.currentStep <= 4) {
+      return 1;
+    } else if (this.currentStep <= 6) {
+      return 2;
+    } else {
+      return 3;
+    }
+  }
   goBack() {
     // this.locationStrategy.back();
     this.nextStep(-1);
   }
   nextStep(num: number) {
-    if (this.currentStep + num > 4) {
-      this.currentStep = 4;
+    if (this.currentStep + num > 7) {
+      this.currentStep = 7;
     } else if (this.currentStep + num < 1) {
       this.currentStep = 1;
     } else {
