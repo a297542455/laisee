@@ -10,9 +10,61 @@
   </ion-popover>
 
   <form [formGroup]="form">
-    <div class="fullWidth ion-text-center" *ngIf="blessing">
+    <div class="full-width ion-text-center" *ngIf="blessing">
       <div class="blessing-title">Blessing</div>
       <div>{{blessing}}</div>
+    </div>
+
+    <!-- 表單確認信息表 -->
+    <div class="form-info font12">
+      <div class="form-left">send 🧧 to</div>
+      <div class="form-right ion-text-end">
+        <div>Suspicious 模擬**</div>
+        <div class="colorccc">{{formValue.name}}</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">From</div>
+      <div class="form-right ion-text-end">
+        <div>VIP i-Account Multi-CurrencyCurrentAccount</div>
+        <div class="colorccc">{{formValue.account}}</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Beneficiary Bank</div>
+      <div class="form-right ion-text-end">
+        <div>{{formValue.bank}}</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Amount</div>
+      <div class="form-right ion-text-end">
+        <div>{{formValue.currency}} {{(formValue.amount * formValue.count).toFixed(2)}}</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Service Charges</div>
+      <div class="form-right ion-text-end">
+        <div>Free</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Transfer Method</div>
+      <div class="form-right ion-text-end">
+        <div>FPS</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Transfer Limit Type</div>
+      <div class="form-right ion-text-end">
+        <div>Small-value Transfer</div>
+      </div>
+    </div>
+    <div class="form-info font12">
+      <div class="form-left">Transfer Date</div>
+      <div class="form-right ion-text-end">
+        <div>{{nowDate}}</div>
+      </div>
     </div>
   </form>
 

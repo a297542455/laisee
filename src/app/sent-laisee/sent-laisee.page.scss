@@ -22,6 +22,10 @@
     margin-bottom: 10px;
   }
 
+  .colorccc {
+    color: #ccc;
+  }
+
   .singe-line {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -266,6 +270,9 @@
     margin-top: 16px;
     flex-wrap: nowrap;
     overflow-x: scroll;
+    &::-webkit-scrollbar {
+      width: 0; /* 隐藏默认的滚动条 */
+    }
     .emoji-item {
       background-color: #fff;
       font-size: 24px;
@@ -275,7 +282,7 @@
   }
 
   // step5 css
-  .fullWidth {
+  .full-width {
     background-color: var(--ion-color-laisee);
     margin: 0 -16px;
     padding: 8px 16px;
@@ -284,5 +291,20 @@
   }
   .blessing-title {
     opacity: 0.4;
+  }
+
+  .form-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #fff;
+
+    .form-left {
+      flex: 1 1 60%;
+      color: #666;
+    }
+    .form-right {
+      flex: 1 1 40%;
+    }
   }
 }

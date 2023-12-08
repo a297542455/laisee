@@ -68,14 +68,10 @@ export class Step3Component implements OnInit {
   // 當前選中賬號數據
   currentAccount!: Account;
 
-  // 賬號選定
+  // 賬號選定 - 注意在點擊下一步時，才把數據更新到 form
   setValue(event: any) {
     if (event.detail.data) {
       this.currentAccount = event.detail.data;
-      this.form.setValue({
-        ...this.form.value,
-        account: event.detail.data.id,
-      });
     }
   }
 
@@ -111,6 +107,10 @@ export class Step3Component implements OnInit {
   }
 
   goNext() {
+    this.form.setValue({
+      ...this.form.value,
+      account: this.currentAccount.id,
+    });
     this.nextStep.emit(1);
   }
 }
