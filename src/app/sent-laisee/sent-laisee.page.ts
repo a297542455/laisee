@@ -23,7 +23,7 @@ export class SentLaiseePage {
 
   // 這個表單數據在全 sent-laisee 公用
   form = new FormGroup({
-    name: new FormControl('888888888', Validators.required),
+    name: new FormControl('', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
@@ -61,7 +61,7 @@ export class SentLaiseePage {
 
   // 按照UI圖3步設計，前端頁面不好劃分
   // 目前每個步驟分一個step，再用 step 設置進度progress
-  currentStep = 5;
+  currentStep = 1;
   get progress() {
     if (this.currentStep <= 4) {
       return 1;
