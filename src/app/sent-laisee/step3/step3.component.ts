@@ -70,7 +70,6 @@ export class Step3Component implements OnInit {
 
   // 賬號選定
   setValue(event: any) {
-    console.log('event.detail.data -----> ', event.detail.data);
     if (event.detail.data) {
       this.currentAccount = event.detail.data;
       this.form.setValue({
@@ -97,10 +96,12 @@ export class Step3Component implements OnInit {
 
   constructor(private service: SentLaiseeService) {}
   ngOnInit() {
+    // 獲取聯係人列表
+    this.getAccounts();
+
     // 上一個頁面禁止輸入了，這裏要恢復
     this.form.get('name')?.enable();
-    this.getAccounts();
-    console.log('this.form', this.form.value);
+
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
       console.log('Form value changed:', value);

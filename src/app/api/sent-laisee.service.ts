@@ -70,7 +70,6 @@ export class SentLaiseeService {
   constructor(private http: HttpClient) {}
   // 999999999 模擬錯誤信息
   getData(name: string): Form {
-    console.log('getData -----> ', name);
     if (name == '999999999') {
       return defaultValue;
     }

@@ -14,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'sent-laisee',
+    title: 'Sent Laisee',
     loadChildren: () =>
       import('./sent-laisee/sent-laisee.module').then(
         (m) => m.SentLaiseePageModule

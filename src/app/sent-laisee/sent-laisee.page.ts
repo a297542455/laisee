@@ -20,7 +20,7 @@ export class SentLaiseePage {
   constructor(private locationStrategy: LocationStrategy) {}
   // 這個表單數據在全 sent-laisee 公用
   form = new FormGroup({
-    name: new FormControl('999999992', Validators.required),
+    name: new FormControl('', Validators.required),
     payee: new FormControl(''),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
@@ -50,8 +50,6 @@ export class SentLaiseePage {
       );
 
       const isValid = regexPattern.test(str);
-
-      console.log('str -----> ', isValid, regexPattern);
       return !isValid ? { blessing: { value: control.value } } : null;
     };
   }
