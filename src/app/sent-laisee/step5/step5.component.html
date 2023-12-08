@@ -1,0 +1,16 @@
+<div class="content">
+  <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
+    <div class="bold">Confirmation</div>
+    <ion-icon slot="end" name="help-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding">文案解釋説明文案解釋説明文案解釋説明文案解釋説明文案解釋説明</ion-content>
+    </ng-template>
+  </ion-popover>
+
+  <form [formGroup]="form">
+  </form>
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Next</ion-button>
+</div>

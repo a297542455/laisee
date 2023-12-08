@@ -12,6 +12,7 @@ import { Step2Component } from './step2/step2.component';
 import { Step3Component } from './step3/step3.component';
 import { Step4Component } from './step4/step4.component';
 import { RecordComponent } from './step4/record/record.component';
+import { Step5Component } from './step5/step5.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { RecordComponent } from './step4/record/record.component';
     Step2Component,
     Step3Component,
     Step4Component,
+    Step5Component,
     RecordComponent,
   ],
 })
