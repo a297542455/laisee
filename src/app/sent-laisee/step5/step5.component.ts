@@ -1,12 +1,12 @@
 import { SentLaiseeService } from './../../api/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import * as moment from 'moment';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-step5',
