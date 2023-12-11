@@ -27,6 +27,8 @@
 
     <!-- progress2 -->
     <app-step5 *ngIf="currentStep === 5" (nextStep)="nextStep($event)" [form]="form"></app-step5>
+    <app-step6 *ngIf="currentStep === 6" (nextStep)="nextStep($event)"></app-step6>
+    <app-step7 *ngIf="currentStep === 7" (nextStep)="nextStep($event)"></app-step7>
   </ng-container>
 
   <ion-accordion-group class="accordion-group" color="laisee">

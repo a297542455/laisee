@@ -1,0 +1,32 @@
+<div class="content">
+  <ion-button fill="clear" id="click-trigger" size="small" class="custom-button mb10">
+    <div class="">Transaction Authorization</div>
+    <ion-icon slot="end" name="help-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="click-trigger" triggerAction="click">
+    <ng-template>
+      <ion-content class="ion-padding">文案解釋説明文案解釋説明文案解釋説明文案解釋説明文案解釋説明</ion-content>
+    </ng-template>
+  </ion-popover>
+
+
+  <div class="code-info font12 ">
+    <div class="mb10 bold">A 6-digit One-Time-Password (OTP) has been sent to your registered mobile number +852
+      5722****via
+      SMS.</div>
+    <div class="mb10 bold">Please enter the OTP to authenticate your instruction.</div>
+    <div>
+      <input type="number" [(ngModel)]="code" oninput="if(value.length>6) value=value.slice(0,6)" required
+        class="custom-input form-control mb10" color="laisee" placeholder="Please enter a 6-digit OTP" />
+    </div>
+    <div class="color999" *ngIf="count !== 0; else elseBlock">SMS OTP can be resent after <span
+        class="color666 bold">{{count}}</span> seconds</div>
+
+    <ng-template #elseBlock>
+      <div (click)="startCount()" class="color999">click here to sent OTP again</div>
+    </ng-template>
+  </div>
+
+  <ion-button [disabled]="codeValid" expand="full" shape="round" color="laisee" class="next-btn"
+    (click)="goNext()">Next</ion-button>
+</div>

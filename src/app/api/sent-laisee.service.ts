@@ -88,4 +88,11 @@ export class SentLaiseeService {
   getEmojis() {
     return emojis;
   }
+
+  sentCode(code: number) {
+    if (code === 666666) {
+      return false;
+    }
+    return true;
+  }
 }

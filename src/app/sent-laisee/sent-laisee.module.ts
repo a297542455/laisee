@@ -13,6 +13,8 @@ import { Step3Component } from './step3/step3.component';
 import { Step4Component } from './step4/step4.component';
 import { RecordComponent } from './step4/record/record.component';
 import { Step5Component } from './step5/step5.component';
+import { Step6Component } from './step6/step6.component';
+import { Step7Component } from './step7/step7.component';
 
 @NgModule({
   imports: [
@@ -30,6 +32,8 @@ import { Step5Component } from './step5/step5.component';
     Step4Component,
     Step5Component,
     RecordComponent,
+    Step6Component,
+    Step7Component,
   ],
 })
 export class SentLaiseePageModule {}
