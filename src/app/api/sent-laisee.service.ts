@@ -4,21 +4,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const defaultValue = {
-  name: '',
+  name: '13333333333',
   payee: '模擬數據**',
   bank: '模擬銀行',
   currency: 'CNY',
   amount: '20',
   count: 1,
-  account: '',
+  account: '111111111',
   blessing: '恭喜發財利是逗來🧧🧧',
 };
 
 const accounts = [
-  { id: 111111111, CNY: 11100, HKD: 11000, USD: 10000 },
-  { id: 222222222, CNY: 22200, HKD: 22000, USD: 20000 },
-  { id: 333333333, CNY: 33300, HKD: 33000, USD: 30000 },
-  { id: 444444444, CNY: 44400, HKD: 44000, USD: 40000 },
+  { id: '111111111', CNY: 11100, HKD: 11000, USD: 10000 },
+  { id: '222222222', CNY: 22200, HKD: 22000, USD: 20000 },
+  { id: '333333333', CNY: 33300, HKD: 33000, USD: 30000 },
+  { id: '444444444', CNY: 44400, HKD: 44000, USD: 40000 },
 ];
 
 // 聯係人選項
@@ -55,14 +55,14 @@ export type Contact = {
 };
 
 export type Account = {
-  id: number;
+  id: string;
   CNY: number;
   HKD: number;
   USD: number;
 };
 
 export type ActionSheetButtons<T> = {
-  text: string | number;
+  text: string;
   role?: string;
   data?: T;
 }[];

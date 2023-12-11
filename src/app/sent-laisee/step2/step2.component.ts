@@ -35,7 +35,7 @@ export class Step2Component implements OnInit, OnDestroy {
   }
 
   get name() {
-    return this.form.get('name')?.value;
+    return this.form.get('name')?.value || '';
   }
 
   // 根據當前 id 簡單判斷

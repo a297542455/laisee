@@ -1,4 +1,4 @@
-import { emojis } from './../api/sent-laisee.service';
+import { SentLaiseeService } from './../api/sent-laisee.service';
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
@@ -19,7 +19,10 @@ import { IonContent } from '@ionic/angular';
 })
 export class SentLaiseePage {
   @ViewChild(IonContent) content!: IonContent;
-  constructor(private locationStrategy: LocationStrategy) {}
+  constructor(
+    private service: SentLaiseeService,
+    private locationStrategy: LocationStrategy
+  ) {}
 
   // 這個表單數據在全 sent-laisee 公用
   form = new FormGroup({
@@ -47,7 +50,10 @@ export class SentLaiseePage {
       // 允許爲空
       if (!str) return null;
       // 将表情符号数组转换成正则表达式的字符集
-      const emojiPattern = emojis.map((emoji) => `${emoji}`).join('|');
+      const emojiPattern = this.service
+        .getEmojis()
+        .map((emoji) => `${emoji}`)
+        .join('|');
 
       // 构造正则表达式
       const regexPattern = new RegExp(
@@ -76,12 +82,13 @@ export class SentLaiseePage {
     this.nextStep(-1);
   }
   nextStep(num: number) {
-    if (this.currentStep + num > 7) {
+    const nextStep = this.currentStep + num;
+    if (nextStep > 7) {
       this.currentStep = 7;
-    } else if (this.currentStep + num < 1) {
+    } else if (nextStep < 1) {
       this.currentStep = 1;
     } else {
-      this.currentStep += num;
+      this.currentStep = nextStep;
       this.content.scrollToTop();
     }
   }

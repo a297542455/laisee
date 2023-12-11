@@ -43,7 +43,7 @@ export class Step3Component implements OnInit {
     return this.form.get('count')?.value;
   }
 
-  get currency(): keyof Account {
+  get currency(): keyof Omit<Account, 'id'> {
     return this.form.get('currency')?.value;
   }
 
