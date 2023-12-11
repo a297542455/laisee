@@ -27,7 +27,6 @@ export class Step1Component implements OnInit {
   }
   ngOnInit() {
     this.getContacts();
-    this.form.get('name')?.enable();
     this.nameInput(this.name?.value);
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
@@ -105,7 +104,7 @@ export class Step1Component implements OnInit {
     const name = this.form.get('name')?.value;
     const data = this.service.getData(name);
     if (data.name) {
-      this.form.setValue(data);
+      this.form.patchValue(data);
       this.nextStep.emit(1);
     } else {
       this.isToastOpen = true;

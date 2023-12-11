@@ -21,13 +21,11 @@ export class Step3Component implements OnInit {
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
 
   btns = [20, 50, 100, 500];
-  btnCurrent = 0;
 
   myNums = ['Send one', 'Double up'];
 
-  btnClick(amount: number, index: number) {
+  btnClick(amount: number) {
     this.form.setValue({ ...this.form.value, amount });
-    this.btnCurrent = index;
   }
 
   numClick(index: number) {
@@ -41,6 +39,10 @@ export class Step3Component implements OnInit {
 
   get count() {
     return this.form.get('count')?.value;
+  }
+
+  get btnCurrent() {
+    return this.btns.indexOf(Number(this.form.get('amount')?.value));
   }
 
   get currency(): keyof Omit<Account, 'id'> {
@@ -100,9 +102,6 @@ export class Step3Component implements OnInit {
       console.log('Form value changed:', value);
 
       // 在这里可以执行你想要的逻辑
-      this.btnCurrent = this.btns.indexOf(
-        Number(this.form.get('amount')?.value)
-      );
     });
   }
 

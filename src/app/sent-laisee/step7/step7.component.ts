@@ -34,4 +34,8 @@ export class Step7Component implements OnInit {
   share() {
     alert('Share success');
   }
+
+  goHistory() {
+    alert('查看歷史');
+  }
 }

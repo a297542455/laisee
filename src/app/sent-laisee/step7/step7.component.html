@@ -105,13 +105,13 @@
     <div>What's next</div>
     <div class="underline"></div>
     <div>
-      <ion-button fill="clear" size="small" color="laisee">
+      <ion-button fill="clear" size="small" color="laisee" (click)="goNext()">
         <ion-icon slot="start" name="share" class="next-icon"></ion-icon>
-        <div class="bold" (click)="goNext()">Send Another Voice Laisee</div>
+        <div class="bold">Send Another Voice Laisee</div>
       </ion-button>
     </div>
     <div>
-      <ion-button fill="clear" size="small" color="laisee">
+      <ion-button fill="clear" size="small" color="laisee" (click)="goHistory()">
         <ion-icon slot="start" name="search" class="next-icon"></ion-icon>
         <div class="bold">View Transfer History</div>
       </ion-button>

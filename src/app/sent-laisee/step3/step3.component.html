@@ -38,7 +38,7 @@
         <ion-select-option value="USD">USD</ion-select-option>
         <ion-select-option value="HKD">HKD</ion-select-option>
       </ion-select>
-      <input type="text" formControlName="amount" required class="custom-input form-control" />
+      <input type="number" formControlName="amount" required class="custom-input form-control" />
 
     </div>
     <div *ngIf="amount?.errors" class="alert error-in-input">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="myBtns flex ion-margin-top">
-      <ion-button *ngFor="let value of btns; let i = index" (click)="btnClick(value, i)"
+      <ion-button *ngFor="let value of btns; let i = index" (click)="btnClick(value)"
         [class.btnCurrent]="i === btnCurrent" class="myBtn bold" [color]="i === btnCurrent? 'laisee':'light'"
         size="small">
         {{ value }}
