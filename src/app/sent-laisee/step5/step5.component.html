@@ -33,7 +33,7 @@
     <div class="form-info font12">
       <div class="form-left">Beneficiary Bank</div>
       <div class="form-right ion-text-end">
-        <div>{{formValue.bank}}</div>
+        <div>{{formValue.bank || 'Default Receiving Bank'}}</div>
       </div>
     </div>
     <div class="form-info font12">
@@ -63,10 +63,21 @@
     <div class="form-info font12">
       <div class="form-left">Transfer Date</div>
       <div class="form-right ion-text-end">
-        <div>{{nowDate}}</div>
+        <div>Now({{nowDate}})</div>
+      </div>
+    </div>
+    <div class="terms font12 color999">
+      <div class="mb10">Terms and Conditions</div>
+      <div class="color999">
+        I confirm that I have read, agreed and understood the <span class="colorlaisee bold">Terms and Conditions for
+          "FPS"
+          Services</span>. Besides, I agree
+        to receive such terms and conditions in non-paper based format, and understand that I shall download and store
+        the relevant document via the above hyperlink for future reference.
       </div>
     </div>
   </form>
 
-  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Next</ion-button>
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Confirm & Share your
+    blessing</ion-button>
 </div>
