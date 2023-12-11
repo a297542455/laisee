@@ -75,7 +75,7 @@ export class SentLaiseeService {
   // 999999999 模擬錯誤信息
   getData(name: string): Form {
     if (name == '999999999') {
-      return defaultValue;
+      return { ...defaultValue, name: '' };
     }
     return { ...defaultValue, name };
   }
