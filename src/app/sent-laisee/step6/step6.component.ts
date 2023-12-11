@@ -1,12 +1,15 @@
 import { SentLaiseeService } from './../../api/sent-laisee.service';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -14,8 +17,9 @@ import {
   templateUrl: './step6.component.html',
   styleUrls: ['./step6.component.scss'],
 })
-export class Step6Component implements OnInit, OnDestroy {
+export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
+  @ViewChild('myInput') myInput!: ElementRef;
 
   constructor(private service: SentLaiseeService) {}
   count = 0;
@@ -42,6 +46,11 @@ export class Step6Component implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startCount();
+  }
+
+  ngAfterViewInit() {
+    // 当视图初始化完成后，执行自动聚焦
+    this.myInput?.nativeElement.focus();
   }
 
   ngOnDestroy() {

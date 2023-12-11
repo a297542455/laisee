@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   ActionSheetButtons,
   Contact,
@@ -16,9 +25,10 @@ import {
   templateUrl: './step1.component.html',
   styleUrls: ['./step1.component.scss'],
 })
-export class Step1Component implements OnInit {
+export class Step1Component implements OnInit, AfterViewInit {
   @Input() form!: FormGroup;
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
+  @ViewChild('myInput') myInput!: ElementRef;
 
   constructor(private service: SentLaiseeService) {}
 
@@ -34,6 +44,11 @@ export class Step1Component implements OnInit {
       // 在这里可以执行你想要的逻辑
       this.nameInput(this.name?.value);
     });
+  }
+
+  ngAfterViewInit() {
+    // 当视图初始化完成后，执行自动聚焦
+    this.myInput?.nativeElement.focus();
   }
 
   // 聯係人選項

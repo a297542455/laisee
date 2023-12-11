@@ -17,7 +17,7 @@
   <form [formGroup]="form">
     <div class="form-group">
       <input type="text" formControlName="name" required maxlength="50" class="custom-input form-control mb10"
-        color="laisee" placeholder="Mobile No., Payee Name, Email or FPS ID" />
+        color="laisee" placeholder="Mobile No., Payee Name, Email or FPS ID" #myInput />
 
       <div *ngIf="name?.errors; else elseBlock" class="alert">
         <ion-text [hidden]="name?.valid || name?.pristine" color="danger" class="font12">Please enter a valid mobile
