@@ -52,7 +52,7 @@ export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
     // 当视图初始化完成后，执行自动聚焦
     setTimeout(() => {
       this.myInput?.nativeElement?.focus();
-    }, 100);
+    }, 300);
   }
 
   ngOnDestroy() {
