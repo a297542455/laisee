@@ -25,7 +25,7 @@ export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
   count = 0;
   countTimer = 0;
 
-  startCount = (time = 10) => {
+  startCount = (time = 60) => {
     if (this.count > 0) return;
     this.count = time;
     this.countTimer = window.setInterval(() => {
@@ -38,7 +38,7 @@ export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
 
   code!: number;
   get codeValid() {
-    if (this.code && this.code.toString().length === 6) {
+    if (this.code && /^\d{6}$/g.test(this.code.toString())) {
       return false;
     }
     return true;
