@@ -89,8 +89,8 @@ export class SentLaiseeService {
     return emojis;
   }
 
-  sentCode(code: number) {
-    if (code === 666666) {
+  sentCode(code: string) {
+    if (code === '666666') {
       return false;
     }
     return true;

@@ -36,7 +36,7 @@ export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
     }, 1000);
   };
 
-  code!: number;
+  code!: string;
   get codeValid() {
     if (this.code && /^\d{6}$/g.test(this.code.toString())) {
       return false;
