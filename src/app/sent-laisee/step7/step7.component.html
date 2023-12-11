@@ -1,3 +1,122 @@
-<p>
-  step7 works!
-</p>
+<div class="content">
+  <div class="flex success-title">
+    <div class="left">
+      <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
+    </div>
+    <div class="right">
+      <div>Your transfer has been processed!</div>
+      <div class="font12">(Reference No. ABC20231129PAYCO100012111111)</div>
+    </div>
+  </div>
+
+  <div class="laisee-box font12 ion-padding colorfff ion-text-center">
+
+    <div class="click-share" (click)="share()">Click to share your e-Laisee!</div>
+    <div class="avatar mb10">
+      <img src="assets/img/avatar.png" />
+    </div>
+    <div *ngIf="formValue.blessing">
+      <div class="colorpink">Blessing</div>
+      <div class="blessing font24">{{formValue.blessing}}</div>
+    </div>
+
+
+    <!--表單信息内容，基本與step5一致 -->
+    <div class="detail">
+      <div class="laisee-info font12">
+        <div class="laisee-left">send 🧧 to</div>
+        <div class="laisee-right ion-text-end">
+          <div>Suspicious 模擬**</div>
+          <div>{{formValue.name}}</div>
+        </div>
+      </div>
+      <div class="laisee-info font12">
+        <div class="laisee-left">From</div>
+        <div class="laisee-right ion-text-end">
+          <div>VIP i-Account Multi-Currency Current Account</div>
+          <div>{{formValue.account}}</div>
+        </div>
+      </div>
+      <div class="laisee-info font12">
+        <div class="laisee-left">Beneficiary Bank</div>
+        <div class="laisee-right ion-text-end">
+          <div>{{formValue.bank || 'Default Receiving Bank'}}</div>
+        </div>
+      </div>
+      <div class="laisee-info font12">
+        <div class="laisee-left">Amount</div>
+        <div class="laisee-right ion-text-end">
+          <div>{{formValue.currency}} {{total}}</div>
+        </div>
+      </div>
+
+      <ion-button fill="clear" size="small" class="colorfff" *ngIf="!showMoreItems;else elseBlock;"
+        (click)="showMoreItems=!showMoreItems ">
+        <div class="bold">View More</div>
+        <ion-icon slot="end" name="chevron-down"></ion-icon>
+      </ion-button>
+
+      <ng-template #elseBlock>
+
+        <div class="laisee-info font12">
+          <div class="laisee-left">Service Charges</div>
+          <div class="laisee-right ion-text-end">
+            <div>Free</div>
+          </div>
+        </div>
+        <div class="laisee-info font12">
+          <div class="laisee-left">Transfer Method</div>
+          <div class="laisee-right ion-text-end">
+            <div>FPS</div>
+          </div>
+        </div>
+        <div class="laisee-info font12">
+          <div class="laisee-left">Transfer Limit Type</div>
+          <div class="laisee-right ion-text-end">
+            <div>Small-value Transfer</div>
+          </div>
+        </div>
+        <div class="laisee-info font12">
+          <div class="laisee-left">Transfer Date</div>
+          <div class="laisee-right ion-text-end">
+            <div>Now({{nowDate}})</div>
+          </div>
+        </div>
+
+        <ion-button fill="clear" size="small" class="colorfff" (click)="showMoreItems=!showMoreItems ">
+          <div class="bold">View More</div>
+          <ion-icon slot="end" name="chevron-up"></ion-icon>
+        </ion-button>
+      </ng-template>
+    </div>
+
+    <div class="share-text">
+      <div>Remember to share your Laisee and/ orVoice Blessing!</div>
+      <div>
+        <ion-button fill="outline" shape="round" color="white" size="small" (click)="share()">
+          <ion-icon slot="start" name="share-social"></ion-icon>
+          Share
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-info">
+    <div>What's next</div>
+    <div class="underline"></div>
+    <div>
+      <ion-button fill="clear" size="small" color="laisee">
+        <ion-icon slot="start" name="share" class="next-icon"></ion-icon>
+        <div class="bold" (click)="goNext()">Send Another Voice Laisee</div>
+      </ion-button>
+    </div>
+    <div>
+      <ion-button fill="clear" size="small" color="laisee">
+        <ion-icon slot="start" name="search" class="next-icon"></ion-icon>
+        <div class="bold">View Transfer History</div>
+      </ion-button>
+    </div>
+  </div>
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" (click)="goNext()">Done</ion-button>
+</div>

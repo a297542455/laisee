@@ -84,7 +84,8 @@ export class SentLaiseePage {
   nextStep(num: number) {
     const nextStep = this.currentStep + num;
     if (nextStep > 7) {
-      this.currentStep = 7;
+      this.form.patchValue({ name: '' });
+      this.currentStep = 1;
     } else if (nextStep < 1) {
       this.currentStep = 1;
     } else {

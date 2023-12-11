@@ -33,6 +33,9 @@
   .mb10 {
     margin-bottom: 10px;
   }
+  .colorfff {
+    color: #fff;
+  }
 
   .colorccc {
     color: #ccc;
@@ -323,6 +326,7 @@
     opacity: 0.4;
   }
 
+  // step6 css
   .form-info {
     display: flex;
     justify-content: space-between;
@@ -330,15 +334,86 @@
     border-bottom: 1px solid #fff;
 
     .form-left {
-      flex: 1 1 60%;
+      flex: 1 1 40%;
       color: #999;
     }
     .form-right {
-      flex: 1 1 40%;
+      flex: 1 1 60%;
     }
   }
   .terms {
     padding: 16px 0;
     line-height: 18px;
+  }
+
+  // step7 css
+  .success-title {
+    line-height: 20px;
+  }
+  .success-icon {
+    font-size: 60px;
+    color: #73c5bd;
+  }
+
+  .laisee-box {
+    background: url("../../assets/img/bg-color.png") #f5b034 no-repeat left
+      top/100% 137px;
+    border-radius: 16px;
+    padding-bottom: 30px;
+
+    .click-share {
+      line-height: 40px;
+    }
+    .avatar {
+      margin-top: 16px;
+    }
+
+    .colorpink {
+      color: #da5173;
+    }
+    .blessing {
+      line-height: 40px;
+      padding: 10px;
+    }
+
+    .detail {
+      margin-top: 40px;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #fff;
+    }
+    .laisee-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      .laisee-left {
+        flex: 1 1 40%;
+        text-align: left;
+        color: #da5173;
+      }
+      .laisee-right {
+        flex: 1 1 60%;
+      }
+    }
+
+    .share-text {
+      line-height: 24px;
+    }
+  }
+
+  .next-info {
+    margin: 20px 0;
+    .next-icon {
+      font-size: 40px;
+      line-height: 40px;
+    }
+    .underline {
+      height: 4px;
+      width: 40px;
+      border-radius: 100px;
+      margin: 6px 0;
+      background: var(--ion-color-laisee);
+    }
   }
 }

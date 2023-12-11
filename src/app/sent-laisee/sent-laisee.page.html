@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title collapse="condense">Sent Laisee</ion-title>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="currentStep!==7">
       <ion-icon name="chevron-back-outline" (click)="goBack()"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -28,10 +28,10 @@
     <!-- progress2 -->
     <app-step5 *ngIf="currentStep === 5" (nextStep)="nextStep($event)" [form]="form"></app-step5>
     <app-step6 *ngIf="currentStep === 6" (nextStep)="nextStep($event)"></app-step6>
-    <app-step7 *ngIf="currentStep === 7" (nextStep)="nextStep($event)"></app-step7>
+    <app-step7 *ngIf="currentStep === 7" (nextStep)="nextStep($event)" [form]="form"></app-step7>
   </ng-container>
 
-  <ion-accordion-group class="accordion-group" color="laisee">
+  <ion-accordion-group class="accordion-group" color="laisee" *ngIf="currentStep!==7">
     <ion-accordion>
       <ion-item button detail lines="full" slot="header">
         <ion-label>Remarks</ion-label>

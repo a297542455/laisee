@@ -1,4 +1,4 @@
-import { SentLaiseeService } from './../../api/sent-laisee.service';
+import { Form, SentLaiseeService } from './../../api/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
@@ -19,7 +19,7 @@ export class Step5Component implements OnInit {
 
   constructor(private service: SentLaiseeService) {}
 
-  formValue: any;
+  formValue!: Form;
   ngOnInit() {
     // 订阅表单值的变化
     this.form.valueChanges.subscribe((value) => {
@@ -39,5 +39,9 @@ export class Step5Component implements OnInit {
 
   get blessing() {
     return this.form.get('blessing')?.value;
+  }
+
+  get total() {
+    return (Number(this.formValue.amount) * this.formValue.count).toFixed(2);
   }
 }
