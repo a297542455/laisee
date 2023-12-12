@@ -45,7 +45,7 @@ export class Step3Component implements OnInit {
     return this.btns.indexOf(Number(this.form.get('amount')?.value));
   }
 
-  get currency(): keyof Omit<Account, 'id'> {
+  get currency(): keyof Omit<Account, 'id' | 'userId'> {
     return this.form.get('currency')?.value;
   }
 
@@ -66,9 +66,14 @@ export class Step3Component implements OnInit {
   }
 
   // 賬號選項
-  actionSheetButtons!: ActionSheetButtons<Account>;
+  actionSheetButtons: ActionSheetButtons<Account> = [];
   // 當前選中賬號數據
-  currentAccount!: Account;
+  currentAccount: Account = {
+    id: '',
+    CNY: 0,
+    HKD: 0,
+    USD: 0,
+  };
 
   // 賬號選定 - 注意在點擊下一步時，才把數據更新到 form
   setValue(event: any) {
@@ -78,18 +83,21 @@ export class Step3Component implements OnInit {
   }
 
   getAccounts() {
-    let arr = this.service.getAccounts();
-    this.currentAccount = arr[0];
+    this.service.getAccounts().subscribe((arr) => {
+      this.currentAccount = arr[0];
 
-    const actionSheetButtons: ActionSheetButtons<Account> = arr.map((item) => ({
-      text: String(item.id),
-      data: item,
-    }));
-    actionSheetButtons.push({
-      text: 'Cancel',
-      role: 'cancel',
+      const actionSheetButtons: ActionSheetButtons<Account> = arr.map(
+        (item) => ({
+          text: String(item.id),
+          data: item,
+        })
+      );
+      actionSheetButtons.push({
+        text: 'Cancel',
+        role: 'cancel',
+      });
+      this.actionSheetButtons = actionSheetButtons;
     });
-    this.actionSheetButtons = actionSheetButtons;
   }
 
   constructor(private service: SentLaiseeService) {}

@@ -61,6 +61,7 @@ export type Account = {
   CNY: number;
   HKD: number;
   USD: number;
+  userId?: string;
 };
 
 export type ActionSheetButtons<T> = {
@@ -92,9 +93,10 @@ export class SentLaiseeService {
     return this.http.get<Contact[]>(`/contacts?userId=${this.userId}`);
   }
 
-  getAccounts() {
-    return accounts;
+  getAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(`/accounts?userId=${this.userId}`);
   }
+
   getEmojis() {
     return emojis;
   }
