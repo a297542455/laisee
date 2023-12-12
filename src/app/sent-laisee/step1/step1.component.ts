@@ -19,7 +19,6 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-
 @Component({
   selector: 'app-step1',
   templateUrl: './step1.component.html',
@@ -52,24 +51,26 @@ export class Step1Component implements OnInit, AfterViewInit {
   }
 
   // 聯係人選項
-  actionSheetButtons!: ActionSheetButtons<Contact>;
+  actionSheetButtons: ActionSheetButtons<Contact> = [];
 
   getContacts() {
-    let arr = this.service.getContacts(this.form.get('name')?.value);
-
-    const actionSheetButtons: ActionSheetButtons<Contact> = arr.map((item) => ({
-      text: '模擬：' + item.id,
-      data: item,
-    }));
-    actionSheetButtons.push({
-      text: '錯誤：999999999',
-      data: { id: '999999999' },
+    this.service.getContacts().subscribe((arr) => {
+      const actionSheetButtons: ActionSheetButtons<Contact> = arr.map(
+        (item) => ({
+          text: '模擬：' + item.id,
+          data: item,
+        })
+      );
+      actionSheetButtons.push({
+        text: '錯誤：999999999',
+        data: { id: '999999999' },
+      });
+      actionSheetButtons.push({
+        text: 'Cancel',
+        role: 'cancel',
+      });
+      this.actionSheetButtons = actionSheetButtons;
     });
-    actionSheetButtons.push({
-      text: 'Cancel',
-      role: 'cancel',
-    });
-    this.actionSheetButtons = actionSheetButtons;
   }
 
   // 聯係人選定
@@ -87,6 +88,7 @@ export class Step1Component implements OnInit, AfterViewInit {
     // 可以根据需要添加更多选项
   ];
 
+  type = '';
   // 輸入内容正則匹配 - 郵箱，11位手機號碼，9位FPS ID
   nameInput(name: string) {
     const emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -95,16 +97,19 @@ export class Step1Component implements OnInit, AfterViewInit {
 
     if (mobileReg.test(name)) {
       this.checkboxOptions[0].checked = true;
+      this.type = 'mobile';
     } else {
       this.checkboxOptions[0].checked = false;
     }
     if (emailReg.test(name)) {
       this.checkboxOptions[1].checked = true;
+      this.type = 'Email';
     } else {
       this.checkboxOptions[1].checked = false;
     }
     if (FPSReg.test(name)) {
       this.checkboxOptions[2].checked = true;
+      this.type = 'FPSID';
     } else {
       this.checkboxOptions[2].checked = false;
     }
@@ -117,12 +122,14 @@ export class Step1Component implements OnInit, AfterViewInit {
   isToastOpen = false;
   goNext() {
     const name = this.form.get('name')?.value;
-    const data = this.service.getData(name);
-    if (data.name) {
-      this.form.patchValue(data);
-      this.nextStep.emit(1);
-    } else {
-      this.isToastOpen = true;
-    }
+    this.service.getContactByName(name, this.type).subscribe((data) => {
+      console.log('getContactByName -----> ', data);
+      if (data?.[0]?.id) {
+        this.form.patchValue(data[0]);
+        this.nextStep.emit(1);
+      } else {
+        this.isToastOpen = true;
+      }
+    });
   }
 }

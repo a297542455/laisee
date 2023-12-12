@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 const defaultValue = {
   name: '13333333333',
@@ -52,6 +53,7 @@ export type Contact = {
   mobile?: string;
   Email?: string;
   FPSID?: string;
+  userId?: string;
 };
 
 export type Account = {
@@ -71,18 +73,26 @@ export type ActionSheetButtons<T> = {
   providedIn: 'root',
 })
 export class SentLaiseeService {
-  constructor(private http: HttpClient) {}
-  // 999999999 模擬錯誤信息
-  getData(name: string): Form {
-    if (name == '999999999') {
-      return { ...defaultValue, name: '' };
-    }
-    return { ...defaultValue, name };
+  private userId = '13333333333';
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    const userId = this.route.snapshot.queryParamMap.get('userId') as string;
+    this.userId = userId || this.userId;
   }
-  getContacts(name: string) {
-    return contacts;
+
+  // url中携帶 userId
+  getUserId(): string {
+    return this.userId;
   }
-  getAccounts(name: string) {
+
+  getContactByName(name: string, type: string): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`/contacts?${type}=${name}`);
+  }
+
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`/contacts?userId=${this.userId}`);
+  }
+
+  getAccounts() {
     return accounts;
   }
   getEmojis() {

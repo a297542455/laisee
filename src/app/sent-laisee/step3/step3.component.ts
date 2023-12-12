@@ -78,7 +78,7 @@ export class Step3Component implements OnInit {
   }
 
   getAccounts() {
-    let arr = this.service.getAccounts(this.form.get('name')?.value);
+    let arr = this.service.getAccounts();
     this.currentAccount = arr[0];
 
     const actionSheetButtons: ActionSheetButtons<Account> = arr.map((item) => ({
