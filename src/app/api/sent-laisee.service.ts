@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
-const defaultValue = {
-  name: '13333333333',
-  payee: '模擬數據**',
-  bank: '模擬銀行',
-  currency: 'CNY',
-  amount: '20',
-  count: 1,
-  account: '111111111',
-  blessing: '恭喜發財利是逗來🧧🧧',
+export type Form = {
+  name: string;
+  payee: string;
+  bank: string;
+  currency: string;
+  amount: string;
+  count: number;
+  account: string;
+  blessing: string;
 };
-
-export const emojis = ['🧧', '🧨', '🍊', '🍾', '🎉', '🎊', '❤️', '🎃', '😊'];
-
-export type Form = typeof defaultValue;
 
 export type Contact = {
   id: string;
@@ -45,6 +41,7 @@ export type ActionSheetButtons<T> = {
   providedIn: 'root',
 })
 export class SentLaiseeService {
+  // 留一個 userId 方便展示，真實上綫記得刪除
   private userId = '13333333333';
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     const userId = this.route.snapshot.queryParamMap.get('userId') as string;
@@ -68,6 +65,7 @@ export class SentLaiseeService {
     return this.http.get<Account[]>(`/accounts?userId=${this.userId}`);
   }
 
+  // 多個地方要用到，這裏統一處理好返回emojis數組，類似 ['🧧','🧨']
   async getEmojis() {
     const source$ = this.http.get<{ emoji: string }[]>(`/emojis`);
     const res = await firstValueFrom(source$);
@@ -75,9 +73,6 @@ export class SentLaiseeService {
   }
 
   sentCode(code: string) {
-    if (code === '666666') {
-      return false;
-    }
-    return true;
+    return of(code !== '999999').pipe(delay(300));
   }
 }
