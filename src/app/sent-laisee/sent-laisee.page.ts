@@ -17,14 +17,26 @@ import { IonContent } from '@ionic/angular';
   templateUrl: './sent-laisee.page.html',
   styleUrls: ['./sent-laisee.page.scss'],
 })
-export class SentLaiseePage {
+export class SentLaiseePage implements OnInit {
   @ViewChild(IonContent) content!: IonContent;
   constructor(
     private service: SentLaiseeService,
     private locationStrategy: LocationStrategy
   ) {}
 
-  // 這個表單數據在全 sent-laisee 公用
+  async ngOnInit() {
+    // 異步獲取emojis表情,然後再給表單添加校驗規則
+    await this.getEmojis();
+    this.form.get('blessing')?.addValidators(this.blessingValidator());
+  }
+
+  //  異步獲取emojis表情
+  emojis: string[] = [];
+  async getEmojis() {
+    this.emojis = await this.service.getEmojis();
+  }
+
+  // 這個表單數據在全 sent-laisee 公用，blessing需要在服務器拿回數據再添加校驗規則
   form = new FormGroup({
     name: new FormControl('', Validators.required),
     payee: new FormControl(''),
@@ -38,22 +50,17 @@ export class SentLaiseePage {
     ]),
     count: new FormControl(1),
     account: new FormControl(''),
-    blessing: new FormControl('恭喜發財利是逗來🧧🧧', [
-      this.blessingValidator(),
-    ]),
+    blessing: new FormControl('恭喜發財利是逗來🧧🧧'),
   });
 
-  // 祝福語校驗，目前僅支持 中英文，數字，和提供的emojis
+  // 祝福語校驗，允許爲空，目前僅支持 中英文，數字，和提供的emojis
   blessingValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const str = control.value;
       // 允許爲空
       if (!str) return null;
       // 将表情符号数组转换成正则表达式的字符集
-      const emojiPattern = this.service
-        .getEmojis()
-        .map((emoji) => `${emoji}`)
-        .join('|');
+      const emojiPattern = this.emojis.map((emoji) => `${emoji}`).join('|');
 
       // 构造正则表达式
       const regexPattern = new RegExp(
@@ -61,6 +68,7 @@ export class SentLaiseePage {
       );
 
       const isValid = regexPattern.test(str);
+      // console.log('isValid -----> ', isValid, regexPattern);
       return !isValid ? { blessing: { value: control.value } } : null;
     };
   }

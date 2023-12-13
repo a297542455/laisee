@@ -68,8 +68,8 @@ export class Step4Component implements OnInit {
   }
 
   emojis: string[] = [];
-  getEmojis() {
-    this.emojis = this.service.getEmojis();
+  async getEmojis() {
+    this.emojis = await this.service.getEmojis();
   }
 
   index = 0;
