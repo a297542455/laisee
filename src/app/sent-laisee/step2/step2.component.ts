@@ -27,11 +27,6 @@ export class Step2Component implements OnInit, OnDestroy {
   ngOnInit() {
     // 當前頁面禁止輸入id，離開頁面記得要恢復
     this.form.get('name')?.disable();
-    // 订阅表单值的变化
-    this.form.valueChanges.subscribe((value) => {
-      console.log('Form value changed:', value);
-      // 在这里可以执行你想要的逻辑
-    });
   }
 
   get name() {

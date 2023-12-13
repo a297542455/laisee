@@ -21,11 +21,6 @@ export class Step5Component implements OnInit {
 
   formValue!: Form;
   ngOnInit() {
-    // 订阅表单值的变化
-    this.form.valueChanges.subscribe((value) => {
-      console.log('Form value changed:', value);
-      // 在这里可以执行你想要的逻辑
-    });
     this.formValue = this.form.value;
   }
 
