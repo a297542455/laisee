@@ -104,13 +104,6 @@ export class Step3Component implements OnInit {
   ngOnInit() {
     // 獲取聯係人列表
     this.getAccounts();
-
-    // 订阅表单值的变化
-    this.form.valueChanges.subscribe((value) => {
-      console.log('Form value changed:', value);
-
-      // 在这里可以执行你想要的逻辑
-    });
   }
 
   goNext() {
