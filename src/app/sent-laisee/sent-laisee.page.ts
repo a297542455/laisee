@@ -39,7 +39,7 @@ export class SentLaiseePage implements OnInit {
   // 這個表單數據在全 sent-laisee 公用，blessing需要在服務器拿回數據再添加校驗規則
   form = new FormGroup({
     name: new FormControl('', Validators.required),
-    payee: new FormControl(''),
+    payee: new FormControl('模擬**'),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
     amount: new FormControl('20', [
