@@ -27,6 +27,12 @@ export class Step7Component implements OnInit {
     return moment().format('D MMM YYYY');
   }
 
+  get payee() {
+    let payee = this.form.get('payee')?.value || '';
+    payee = payee.substring(0, 2) + '**' + payee.substring(4);
+    return payee;
+  }
+
   goNext() {
     this.nextStep.emit(1);
   }

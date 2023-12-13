@@ -32,6 +32,11 @@ export class Step2Component implements OnInit, OnDestroy {
   get name() {
     return this.form.get('name')?.value || '';
   }
+  get payee() {
+    let payee = this.form.get('payee')?.value || '';
+    payee = payee.substring(0, 2) + '**' + payee.substring(4);
+    return payee;
+  }
 
   // 根據當前 id 簡單判斷
   get idType() {

@@ -19,6 +19,12 @@ export class Step5Component implements OnInit {
 
   constructor(private service: SentLaiseeService) {}
 
+  get payee() {
+    let payee = this.form.get('payee')?.value || '';
+    payee = payee.substring(0, 2) + '**' + payee.substring(4);
+    return payee;
+  }
+
   formValue!: Form;
   ngOnInit() {
     this.formValue = this.form.value;
