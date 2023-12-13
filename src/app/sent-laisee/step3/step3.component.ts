@@ -114,6 +114,9 @@ export class Step3Component implements OnInit {
   }
 
   goNext() {
+    if (!this.form.valid) {
+      return alert('請輸入正確的金額格式');
+    }
     this.form.setValue({
       ...this.form.value,
       account: this.currentAccount.id,

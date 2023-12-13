@@ -59,12 +59,17 @@ export class Step6Component implements OnInit, OnDestroy, AfterViewInit {
     clearInterval(this.countTimer);
   }
 
-  goNext() {
+  senting = false;
+  async goNext() {
+    this.senting = true;
     // goNext前發請求到後臺驗證
-    if (this.service.sentCode(this.code)) {
-      this.nextStep.emit(1);
-    } else {
-      alert('驗證碼不正確');
-    }
+    this.service.sentCode(this.code).subscribe((bl) => {
+      if (bl) {
+        this.nextStep.emit(1);
+      } else {
+        alert('驗證碼不正確');
+      }
+      this.senting = false;
+    });
   }
 }

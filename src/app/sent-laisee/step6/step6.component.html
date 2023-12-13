@@ -16,7 +16,7 @@
       SMS.</div>
     <div class="mb10 bold">Please enter the OTP to authenticate your instruction.</div>
     <div>
-      <input type="tel" maxLength="6" #myInput autofocus [(ngModel)]="code" required
+      <input type="tel" maxLength="6" #myInput autofocus [(ngModel)]="code" required (keydown.enter)="goNext()"
         class="custom-input form-control mb10" color="laisee" placeholder="Please enter a 6-digit OTP" />
     </div>
     <div class="color999" *ngIf="count !== 0; else elseBlock">SMS OTP can be resent after <span
@@ -27,6 +27,6 @@
     </ng-template>
   </div>
 
-  <ion-button [disabled]="codeValid" expand="full" shape="round" color="laisee" class="next-btn"
+  <ion-button [disabled]="codeValid || senting" expand="full" shape="round" color="laisee" class="next-btn"
     (click)="goNext()">Next</ion-button>
 </div>

@@ -38,7 +38,8 @@
         <ion-select-option value="USD">USD</ion-select-option>
         <ion-select-option value="HKD">HKD</ion-select-option>
       </ion-select>
-      <input type="number" formControlName="amount" required class="custom-input form-control" />
+      <input type="number" formControlName="amount" (keydown.enter)="goNext()" required
+        class="custom-input form-control" />
 
     </div>
     <div *ngIf="amount?.errors" class="alert error-in-input">

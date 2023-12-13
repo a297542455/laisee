@@ -23,7 +23,7 @@
 
     <div class="mb6 bold">Beneficiary Bank</div>
     <div class="form-group ">
-      <input type="text" formControlName="bank" class="custom-input  form-control"
+      <input type="text" (keydown.enter)="goNext()" formControlName="bank" class="custom-input  form-control"
         placeholder="Default Receiving Bank" />
     </div>
     <ion-button fill="clear" id="click-trigger" size="small" class="custom-button ion-margin-bottom font12" disabled>
