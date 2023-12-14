@@ -25,11 +25,11 @@ export class Step3Component implements OnInit {
   myNums = ['Send one', 'Double up'];
 
   btnClick(amount: number) {
-    this.form.setValue({ ...this.form.value, amount });
+    this.form.patchValue({ amount });
   }
 
   numClick(index: number) {
-    this.form.setValue({ ...this.form.value, count: index + 1 });
+    this.form.patchValue({ count: index + 1 });
   }
 
   // 用作驗證，所以不要取值 value
@@ -82,33 +82,66 @@ export class Step3Component implements OnInit {
     }
   }
 
-  getAccounts() {
-    this.service.getAccounts().subscribe((arr) => {
-      this.currentAccount = arr[0];
+  async getAccounts() {
+    const arr = await this.service.getAccounts();
+    if (!arr[0]) {
+      this.message = '當前用戶沒有賬號!';
+      this.isAlertOpen = true;
+      return;
+    }
+    this.currentAccount =
+      arr.find((a) => a.id === this.currentAccount.id) || arr[0];
 
-      const actionSheetButtons: ActionSheetButtons<Account> = arr.map(
-        (item) => ({
-          text: String(item.id),
-          data: item,
-        })
-      );
-      actionSheetButtons.push({
-        text: 'Cancel',
-        role: 'cancel',
-      });
-      this.actionSheetButtons = actionSheetButtons;
+    const actionSheetButtons: ActionSheetButtons<Account> = arr.map((item) => ({
+      text: String(item.id),
+      data: item,
+    }));
+    actionSheetButtons.push({
+      text: 'Cancel',
+      role: 'cancel',
     });
+    this.actionSheetButtons = actionSheetButtons;
   }
 
   constructor(private service: SentLaiseeService) {}
   ngOnInit() {
     // 獲取聯係人列表
+    this.currentAccount.id = this.form.get('account')?.value;
     this.getAccounts();
   }
 
+  isAlertOpen = false;
+  message = '';
+  alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        this.isAlertOpen = false;
+        this.getAccounts();
+      },
+    },
+    {
+      text: 'Try again',
+      role: 'confirm',
+      handler: () => {
+        this.isAlertOpen = false;
+        setTimeout(async () => {
+          // 兩個方法都包含了 this.isAlertOpen = true，需要setTimeout等下一個節點才能觸發
+          await this.getAccounts();
+          this.goNext();
+        }, 0);
+      },
+    },
+  ];
   goNext() {
     if (!this.form.valid) {
       return alert('請輸入正確的金額格式');
+    }
+    if (Number(this.total) > this.currentAccount[this.currency]) {
+      this.message = '當前賬戶餘額不足，請確認后再試!';
+      this.isAlertOpen = true;
+      return;
     }
     this.form.setValue({
       ...this.form.value,

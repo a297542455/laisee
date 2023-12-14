@@ -44,7 +44,7 @@
     </div>
     <div *ngIf="amount?.errors" class="alert error-in-input">
       <ion-text [hidden]="amount?.valid || amount?.pristine" color="danger" class="font12">金額0.01 ~
-        10000,最多兩位小數</ion-text>
+        1000,最多兩位小數</ion-text>
     </div>
 
     <div class="myBtns flex ion-margin-top">
@@ -95,6 +95,8 @@
 
   </form>
 
-  <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!form.valid"
+  <ion-alert [isOpen]="isAlertOpen" [buttons]="alertButtons" [message]="message"></ion-alert>
+
+  <ion-button expand="full" shape="round" color="laisee" class="next-btn" [disabled]="!form.valid || !currentAccount.id"
     (click)="goNext()">Next</ion-button>
 </div>

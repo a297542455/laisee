@@ -45,7 +45,7 @@ export class SentLaiseePage implements OnInit {
     amount: new FormControl('20', [
       Validators.required,
       Validators.min(0.01),
-      Validators.max(10000),
+      Validators.max(1000),
       Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
     ]),
     count: new FormControl(1),

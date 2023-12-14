@@ -61,8 +61,11 @@ export class SentLaiseeService {
     return this.http.get<Contact[]>(`/contacts?userId=${this.userId}`);
   }
 
-  getAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(`/accounts?userId=${this.userId}`);
+  // 改成await方式，方便其他方法使用
+  async getAccounts() {
+    return await firstValueFrom(
+      this.http.get<Account[]>(`/accounts?userId=${this.userId}`)
+    );
   }
 
   // 多個地方要用到，這裏統一處理好返回emojis數組，類似 ['🧧','🧨']
