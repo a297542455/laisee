@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "moment"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -39,6 +42,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/www/",
               "budgets": [
                 {
                   "type": "initial",
