@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/sent-laisee',
+    redirectTo: '/capacitor',
     pathMatch: 'full',
   },
   {
@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./sent-laisee/sent-laisee.module').then(
         (m) => m.SentLaiseePageModule
       ),
+  },
+  {
+    path: 'capacitor',
+    loadChildren: () =>
+      import('./capacitor/capacitor.module').then((m) => m.CapacitorPageModule),
   },
 ];
 

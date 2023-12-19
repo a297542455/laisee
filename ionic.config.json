@@ -1,7 +1,11 @@
 {
-  "name": "my-demo",
+  "name": "my-ionic",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "preferences": {
+        "AndroidSdkPath": "D:\\android-sdk-windows"
+      }
+    }
   },
   "type": "angular"
 }
