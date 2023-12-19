@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/capacitor',
+    redirectTo: '/recording',
     pathMatch: 'full',
   },
   {
@@ -24,6 +24,11 @@ const routes: Routes = [
     path: 'capacitor',
     loadChildren: () =>
       import('./capacitor/capacitor.module').then((m) => m.CapacitorPageModule),
+  },
+  {
+    path: 'recording',
+    loadChildren: () =>
+      import('./recording/recording.module').then((m) => m.RecordingPageModule),
   },
 ];
 

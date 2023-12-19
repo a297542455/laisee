@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>recording</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">recording</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button (click)="startRecording()">Start Recording</ion-button>
+  <ion-button (click)="stopRecording()">Stop Recording</ion-button>
+  <ion-button (click)="playRecording()">Play Recording</ion-button>
+</ion-content>
