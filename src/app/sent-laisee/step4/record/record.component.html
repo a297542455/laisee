@@ -1,7 +1,7 @@
 <div>
-  <!-- 不要銷毀，銷毀會導致綁定的事件失效，也沒必要為這點小功能封裝指令 -->
-  <div #btnRecording>
-    <div class="btn ion-padding" *ngIf="!isOk" [class.active]="active">
+  <div>
+    <div class="btn ion-padding" *ngIf="!isOk" [class.active]="active" (touchstart)="touchstartFn($event)"
+      (touchmove)="touchmoveFn($event)" (touchend)="touchendFn($event)">
       <span>{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
       <span id="btnRecording">{{ text }}</span>
       <ion-icon name="mic-sharp" color="laisee" class="font20"></ion-icon>
@@ -9,12 +9,13 @@
   </div>
   <div class="btn ion-padding" *ngIf="isOk">
     <span (click)="initStatus()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
-    <span (click)="play()"><span class="countFormat">{{ countFormat }}︎ </span> <span>
-        |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
-    <ion-icon name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
-
+    <span><span class="countFormat">{{ countFormat }}︎ </span>
+      <span> |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
+    <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
+    <ion-icon *ngIf="playing" name="pause-sharp" color="laisee" (click)="pause()" class="font20"></ion-icon>
   </div>
 
-  <ion-toast [isOpen]="count >= maxCount * 0.6 && !isOk" position="middle" [message]="(maxCount - count)+'″后將停止錄音'"
+  <audio controls muted preload="auto" #audio hidden></audio>
+  <ion-toast [isOpen]="count >= maxCount - 5 && !isOk" position="middle" [message]="maxCount - count + '″后將停止錄音'"
     [duration]="0" color="success"></ion-toast>
 </div>

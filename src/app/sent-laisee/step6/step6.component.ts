@@ -1,4 +1,4 @@
-import { SentLaiseeService } from './../../api/sent-laisee.service';
+import { SentLaiseeService } from '../../services/sent-laisee.service';
 import {
   AfterViewInit,
   Component,

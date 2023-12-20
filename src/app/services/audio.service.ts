@@ -10,7 +10,14 @@ import {
   providedIn: 'root',
 })
 export class AudioService {
-  recordingData!: RecordingData;
+  recordingData: RecordingData = {
+    value: {
+      recordDataBase64: '',
+      msDuration: 0,
+      mimeType: '',
+    },
+  };
+  audioRef!: HTMLAudioElement;
   startRecording() {
     VoiceRecorder.requestAudioRecordingPermission().then(
       (result: GenericResponse) => console.log(result.value)
@@ -26,19 +33,38 @@ export class AudioService {
       .catch((error) => console.log(error));
   }
 
-  stopRecording() {
-    VoiceRecorder.stopRecording()
-      .then((result: RecordingData) => {
-        console.log(result.value);
-        this.recordingData = result;
-      })
-      .catch((error) => console.log(error));
+  async stopRecording() {
+    const result = await VoiceRecorder.stopRecording();
+    this.recordingData = result;
+    this.loadRecording();
+    return result;
   }
 
-  playRecording() {
+  loadRecording() {
     const { recordDataBase64, mimeType } = this.recordingData.value; // from plugin
-    const audioRef = new Audio(`data:${mimeType};base64,${recordDataBase64}`);
-    audioRef.oncanplaythrough = () => audioRef.play();
-    audioRef.load();
+    this.audioRef = new Audio(`data:${mimeType};base64,${recordDataBase64}`);
+    this.audioRef.load();
+    return this.audioRef;
+  }
+
+  getRecording() {
+    return this.recordingData.value;
+  }
+
+  clearRecording() {
+    this.recordingData.value = {
+      recordDataBase64: '',
+      msDuration: 0,
+      mimeType: '',
+    };
+  }
+
+  // 頁面不需要 audio 控制的話，可以用這裏的方法直接播放
+  play() {
+    this.audioRef && this.audioRef.play();
+  }
+
+  pause() {
+    this.audioRef && this.audioRef.pause();
   }
 }

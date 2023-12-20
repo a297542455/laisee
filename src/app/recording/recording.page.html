@@ -14,7 +14,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button (click)="startRecording()">Start Recording</ion-button>
-  <ion-button (click)="stopRecording()">Stop Recording</ion-button>
-  <ion-button (click)="playRecording()">Play Recording</ion-button>
+
+  <ion-button (click)="startRecording()" [disabled]="playing">Start Recording</ion-button>
+  <ion-button (click)="stopRecording()" [disabled]="!playing">Stop Recording</ion-button>
+
+  <audio controls muted preload="auto" #audio></audio>
 </ion-content>

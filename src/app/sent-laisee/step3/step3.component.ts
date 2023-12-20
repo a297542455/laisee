@@ -2,7 +2,7 @@ import {
   Account,
   ActionSheetButtons,
   SentLaiseeService,
-} from './../../api/sent-laisee.service';
+} from '../../services/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,

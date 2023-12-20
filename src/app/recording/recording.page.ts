@@ -1,5 +1,5 @@
 import { AudioService } from './../services/audio.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-recording',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recording.page.scss'],
 })
 export class RecordingPage implements OnInit {
+  @ViewChild('audio') audio!: ElementRef;
   constructor(private audioService: AudioService) {}
+
+  playing = false;
 
   ngOnInit() {
     console.log('ngOnInit is ready!');
@@ -15,13 +18,15 @@ export class RecordingPage implements OnInit {
 
   startRecording() {
     this.audioService.startRecording();
+    this.playing = true;
   }
 
-  stopRecording() {
-    this.audioService.stopRecording();
-  }
-
-  playRecording() {
-    this.audioService.playRecording();
+  async stopRecording() {
+    const result = await this.audioService.stopRecording();
+    const { recordDataBase64, mimeType } = result.value;
+    console.log('recordDataBase64 -----> ', recordDataBase64);
+    this.audio.nativeElement.src = `data:${mimeType};base64,${recordDataBase64}`;
+    this.audio.nativeElement.load();
+    this.playing = false;
   }
 }

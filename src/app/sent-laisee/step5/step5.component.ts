@@ -1,4 +1,4 @@
-import { Form, SentLaiseeService } from './../../api/sent-laisee.service';
+import { Form, SentLaiseeService } from '../../services/sent-laisee.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
