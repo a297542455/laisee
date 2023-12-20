@@ -1,4 +1,4 @@
-import { SentLaiseeService } from './../api/sent-laisee.service';
+import { SentLaiseeService } from '../services/sent-laisee.service';
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
@@ -86,7 +86,9 @@ export class SentLaiseePage implements OnInit {
     }
   }
   goBack() {
-    // this.locationStrategy.back();
+    if (this.currentStep == 1) {
+      return this.locationStrategy.back();
+    }
     this.nextStep(-1);
   }
   nextStep(num: number) {

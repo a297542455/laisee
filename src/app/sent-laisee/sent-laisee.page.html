@@ -1,11 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title collapse="condense">Sent Laisee</ion-title>
-    <ion-buttons slot="start" *ngIf="currentStep!==7">
-      <ion-icon name="chevron-back-outline" (click)="goBack()"></ion-icon>
+
+    <ion-buttons slot="secondary">
+      <ion-button (click)="goBack()" color="medium">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon name="close-outline" id="open-toast"></ion-icon>
+    <ion-buttons slot="primary">
+      <ion-button id="open-toast" color="medium">
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
       <ion-toast trigger="open-toast" position="middle" message="關閉，該提示3秒后消失" [duration]="3000"></ion-toast>
     </ion-buttons>
     <ion-progress-bar [value]="progress/3" color="laisee"></ion-progress-bar>
