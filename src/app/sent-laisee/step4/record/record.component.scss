@@ -21,3 +21,19 @@
 .font20 {
   font-size: 20px;
 }
+
+.myBtn {
+  --border-radius: 4px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  min-height: auto !important;
+  .btnFlex {
+    --background-hover: #9ce0be;
+    --background-activated: #88f4be;
+    --background-focused: #88f4be;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -47,7 +47,6 @@ export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
       if (this.count > this.maxCount) {
         alert(this.overtimeText);
         this.count = this.maxCount;
-        this.isOk = true;
         this.endCountTime();
       }
     }, 1000);
@@ -114,8 +113,11 @@ export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
     this.pause();
   }
 
-  ngOnInit() {
+  // 錄音權限
+  permission = true;
+  async ngOnInit() {
     this.initStatus();
+    this.permission = await this.audioService.getPermission();
   }
 
   ngOnDestroy() {

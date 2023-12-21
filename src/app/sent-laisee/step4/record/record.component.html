@@ -1,19 +1,28 @@
 <div>
   <div>
-    <div class="btn ion-padding" *ngIf="!isOk" [class.active]="active" (touchstart)="touchstartFn($event)"
-      (touchmove)="touchmoveFn($event)" (touchend)="touchendFn($event)">
-      <span>{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
-      <span id="btnRecording">{{ text }}</span>
-      <ion-icon name="mic-sharp" color="laisee" class="font20"></ion-icon>
+    <div *ngIf="!permission" class="font12 color333 mb10">
+      <div>無錄音權限，如需使用</div>
+      <div>請在<strong class="colorlaisee">"手機設置"</strong>中允許使用權限，並重新進入頁面</div>
     </div>
+    <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="!isOk" [disabled]="!permission"
+      [class.active]="active" (touchstart)="touchstartFn($event)" (touchmove)="touchmoveFn($event)"
+      (touchend)="touchendFn($event)">
+      <div class="btnFlex">
+        <span>{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
+        <span id="btnRecording">{{ text }}</span>
+        <ion-icon name="mic-sharp" color="laisee" class="font20"></ion-icon>
+      </div>
+    </ion-button>
   </div>
-  <div class="btn ion-padding" *ngIf="isOk">
-    <span (click)="initStatus()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
-    <span><span class="countFormat">{{ countFormat }}︎ </span>
-      <span> |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
-    <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
-    <ion-icon *ngIf="playing" name="pause-sharp" color="laisee" (click)="pause()" class="font20"></ion-icon>
-  </div>
+  <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="isOk">
+    <div class="btnFlex">
+      <span (click)="initStatus()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
+      <span><span class="countFormat">{{ countFormat }}︎ </span>
+        <span> |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
+      <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
+      <ion-icon *ngIf="playing" name="pause-sharp" color="laisee" (click)="pause()" class="font20"></ion-icon>
+    </div>
+  </ion-button>
 
   <audio controls muted preload="auto" #audio hidden></audio>
   <ion-toast [isOpen]="count >= maxCount - 5 && !isOk" position="middle" [message]="maxCount - count + '″后將停止錄音'"

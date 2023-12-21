@@ -11,9 +11,10 @@ export class RecordingPage implements OnInit {
   constructor(private audioService: AudioService) {}
 
   playing = false;
+  permission = false;
 
-  ngOnInit() {
-    console.log('ngOnInit is ready!');
+  async ngOnInit() {
+    this.permission = await this.audioService.getPermission();
   }
 
   startRecording() {
