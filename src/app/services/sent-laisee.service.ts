@@ -72,7 +72,9 @@ export class SentLaiseeService {
   async getEmojis() {
     const source$ = this.http.get<{ emoji: string }[]>(`/emojis`);
     const res = await firstValueFrom(source$);
-    return res.map((item) => item.emoji);
+    return res
+      .filter((item) => item.emoji.length === 5)
+      .map((item) => String.fromCodePoint(parseInt(item.emoji, 16)));
   }
 
   sentCode(code: string) {
