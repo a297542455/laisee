@@ -4,9 +4,9 @@
       <div>無錄音權限，如需使用</div>
       <div>請在<strong class="colorlaisee">"手機設置"</strong>中允許使用權限，並重新進入頁面</div>
     </div>
-    <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="!isOk" [disabled]="!permission"
-      [class.active]="active" (touchstart)="touchstartFn($event)" (touchmove)="touchmoveFn($event)"
-      (touchend)="touchendFn($event)">
+    <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="!hasRecording"
+      [disabled]="!permission" [class.active]="active" (touchstart)="touchstartFn($event)"
+      (touchmove)="touchmoveFn($event)" (touchend)="touchendFn($event)">
       <div class="btnFlex">
         <span>{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
         <span id="btnRecording">{{ text }}</span>
@@ -14,9 +14,9 @@
       </div>
     </ion-button>
   </div>
-  <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="isOk">
+  <ion-button block color="white" size="middle" expand="block" class="myBtn" *ngIf="hasRecording">
     <div class="btnFlex">
-      <span (click)="initStatus()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
+      <span (click)="del()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
       <span><span class="countFormat">{{ countFormat }}︎ </span>
         <span> |ıııı||ıı||ıı||ıı||||ı||ı||ı</span></span>
       <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
@@ -24,7 +24,7 @@
     </div>
   </ion-button>
 
-  <audio controls muted preload="auto" #audio hidden></audio>
-  <ion-toast [isOpen]="count >= maxCount - 5 && !isOk" position="middle" [message]="maxCount - count + '″后將停止錄音'"
-    [duration]="0" color="success"></ion-toast>
+  <audio hidden controls muted preload #audio></audio>
+  <ion-toast [isOpen]="count >= maxCount - 5 && !hasRecording" position="middle"
+    [message]="maxCount - count + '″后將停止錄音'" [duration]="0" color="success"></ion-toast>
 </div>

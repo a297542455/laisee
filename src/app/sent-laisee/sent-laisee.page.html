@@ -33,6 +33,8 @@
     <!-- progress2 -->
     <app-step5 *ngIf="currentStep === 5" (nextStep)="nextStep($event)" [form]="form"></app-step5>
     <app-step6 *ngIf="currentStep === 6" (nextStep)="nextStep($event)"></app-step6>
+
+    <!-- progress3 -->
     <app-step7 *ngIf="currentStep === 7" (nextStep)="nextStep($event)" [form]="form"></app-step7>
   </ng-container>
 

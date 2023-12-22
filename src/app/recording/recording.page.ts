@@ -25,7 +25,6 @@ export class RecordingPage implements OnInit {
   async stopRecording() {
     const result = await this.audioService.stopRecording();
     const { recordDataBase64, mimeType } = result.value;
-    console.log('recordDataBase64 -----> ', recordDataBase64);
     this.audio.nativeElement.src = `data:${mimeType};base64,${recordDataBase64}`;
     this.audio.nativeElement.load();
     this.playing = false;
