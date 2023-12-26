@@ -18,24 +18,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ng-container>
+  <ng-container [ngSwitch]="currentStep">
     <!--
       按照UI圖3步設計，前端頁面不好劃分
       1-4 是 progress1
       5 是 progress2
       6 是 progress3
     -->
-    <app-step1 *ngIf="currentStep === 1" (nextStep)="nextStep($event)" [form]="form"></app-step1>
-    <app-step2 *ngIf="currentStep === 2" (nextStep)="nextStep($event)" [form]="form"></app-step2>
-    <app-step3 *ngIf="currentStep === 3" (nextStep)="nextStep($event)" [form]="form"></app-step3>
-    <app-step4 *ngIf="currentStep === 4" (nextStep)="nextStep($event)" [form]="form"></app-step4>
+    <app-step1 *ngSwitchDefault (nextStep)="nextStep($event)" [form]="form"></app-step1>
+    <app-step2 *ngSwitchCase="2" (nextStep)="nextStep($event)" [form]="form"></app-step2>
+    <app-step3 *ngSwitchCase="3" (nextStep)="nextStep($event)" [form]="form"></app-step3>
+    <app-step4 *ngSwitchCase="4" (nextStep)="nextStep($event)" [form]="form"></app-step4>
 
     <!-- progress2 -->
-    <app-step5 *ngIf="currentStep === 5" (nextStep)="nextStep($event)" [form]="form"></app-step5>
-    <app-step6 *ngIf="currentStep === 6" (nextStep)="nextStep($event)"></app-step6>
+    <app-step5 *ngSwitchCase="5" (nextStep)="nextStep($event)" [form]="form"></app-step5>
+    <app-step6 *ngSwitchCase="6" (nextStep)="nextStep($event)"></app-step6>
 
     <!-- progress3 -->
-    <app-step7 *ngIf="currentStep === 7" (nextStep)="nextStep($event)" [form]="form"></app-step7>
+    <app-step7 *ngSwitchCase="7" (nextStep)="nextStep($event)" [form]="form"></app-step7>
   </ng-container>
 
   <ion-accordion-group class="accordion-group" color="laisee" *ngIf="currentStep!==7">
