@@ -12,7 +12,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 // 2. 创建一个拦截器服务
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MyInterceptor implements HttpInterceptor {
   baseUrl = 'https://tanzizhou.fun:5000/laisee';
 
