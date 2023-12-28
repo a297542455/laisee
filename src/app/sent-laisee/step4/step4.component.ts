@@ -96,8 +96,9 @@ export class Step4Component implements OnInit {
     const { recordDataBase64 } = this.audioService.getRecording();
 
     if (recordDataBase64) {
-      this.service.postRecording({ recordDataBase64 }).subscribe((bl) => {
-        if (bl) {
+      this.service.postRecording({ recordDataBase64 }).subscribe((fileUrl) => {
+        if (fileUrl) {
+          this.form.patchValue({ fileUrl });
           this.nextStep.emit(1);
         } else {
           alert('錄音保存失敗，請重試');

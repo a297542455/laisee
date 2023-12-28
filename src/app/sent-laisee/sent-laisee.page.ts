@@ -37,8 +37,8 @@ export class SentLaiseePage implements OnInit {
 
   // 這個表單數據在全 sent-laisee 公用，blessing需要在服務器拿回數據再添加校驗規則
   form = new FormGroup({
-    name: new FormControl('1333333333', Validators.required),
-    payee: new FormControl('模擬**'),
+    name: new FormControl('', Validators.required),
+    payee: new FormControl(''),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
     amount: new FormControl('20', [
@@ -48,8 +48,9 @@ export class SentLaiseePage implements OnInit {
       Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
     ]),
     count: new FormControl(1),
-    account: new FormControl('33333333'),
+    account: new FormControl(''),
     blessing: new FormControl('恭喜發財利是逗來🧧🧧'),
+    fileUrl: new FormControl(''),
   });
 
   // 祝福語校驗，允許爲空，目前僅支持 中英文，數字，和提供的emojis

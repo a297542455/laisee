@@ -13,6 +13,7 @@ export type Form = {
   count: number;
   account: string;
   blessing: string;
+  fileUrl: string;
 };
 
 export type Contact = {
@@ -84,6 +85,7 @@ export class SentLaiseeService {
   // 錄音接口暫不存在，顯示二進制文件即可
   postRecording(data: Object) {
     console.log('錄音數據 -----> ', data);
-    return of(data).pipe(delay(300));
+    const fileUrl = `虚拟${+new Date()}.mp3`;
+    return of(fileUrl).pipe(delay(300));
   }
 }

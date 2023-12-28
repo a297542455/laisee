@@ -91,12 +91,12 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   // 停止錄音和回復原始狀態
-  stopRecordingAndInitStatus() {
-    window.clearInterval(this.countTimer);
-    this.countTimer = 0;
-    this.audioService.stopRecording();
+  async stopRecordingAndInitStatus() {
+    await this.audioService.stopRecording();
     this.audioService.clearRecording();
     this.initStatus();
+    window.clearInterval(this.countTimer);
+    this.countTimer = 0;
   }
 
   async endCountTime() {
@@ -108,8 +108,8 @@ export class RecordComponent implements OnInit, OnDestroy {
     }
     // 錄音時間太短
     if (this.count < 1) {
-      alert('錄音時間太短');
       this.stopRecordingAndInitStatus();
+      alert('錄音時間太短');
       return;
     }
     window.clearInterval(this.countTimer);
@@ -145,7 +145,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   get hasRecording() {
-    return this.audioService.getRecordingSrc().length > 100;
+    return this.audioService.getRecording().msDuration >= 1000;
   }
 
   playing = false;
@@ -192,7 +192,7 @@ export class RecordComponent implements OnInit, OnDestroy {
       barGap: 4,
       height: 14, // 设置整体图形高度
       normalize: true, // 波形圖拉伸到 height
-      interact: false, // 禁止點擊波形圖交互
+      // interact: false, // 禁止點擊波形圖交互
       url: this.audioService.getRecordingSrc(),
       // url: 'assets/long.mp3',
       // url: 'assets/short.mp3',
