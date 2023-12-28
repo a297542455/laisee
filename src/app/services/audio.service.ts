@@ -87,10 +87,10 @@ export class AudioService {
 
   // 頁面不需要 audio 控制的話，可以用這裏的方法直接播放
   play() {
-    this.audioRef && this.audioRef.play();
+    this?.audioRef?.play();
   }
 
   pause() {
-    this.audioRef && this.audioRef.pause();
+    this?.audioRef?.pause();
   }
 }

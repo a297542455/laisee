@@ -11,7 +11,6 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
-
 @Component({
   selector: 'app-sent-laisee',
   templateUrl: './sent-laisee.page.html',
@@ -38,7 +37,7 @@ export class SentLaiseePage implements OnInit {
 
   // 這個表單數據在全 sent-laisee 公用，blessing需要在服務器拿回數據再添加校驗規則
   form = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('1333333333', Validators.required),
     payee: new FormControl('模擬**'),
     bank: new FormControl(''),
     currency: new FormControl('CNY'),
@@ -49,7 +48,7 @@ export class SentLaiseePage implements OnInit {
       Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/),
     ]),
     count: new FormControl(1),
-    account: new FormControl(''),
+    account: new FormControl('33333333'),
     blessing: new FormControl('恭喜發財利是逗來🧧🧧'),
   });
 
@@ -75,7 +74,7 @@ export class SentLaiseePage implements OnInit {
 
   // 按照UI圖3步設計，前端頁面不好劃分
   // 目前每個步驟分一個step，再用 step 設置進度progress
-  currentStep = 1;
+  currentStep = 4;
   get progress() {
     if (this.currentStep <= 4) {
       return 1;

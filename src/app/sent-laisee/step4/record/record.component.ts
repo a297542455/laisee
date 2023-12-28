@@ -9,13 +9,14 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import { AudioService } from 'src/app/services/audio.service';
+import WaveSurfer from 'wavesurfer7';
 
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss'],
 })
-export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RecordComponent implements OnInit, OnDestroy {
   constructor(private audioService: AudioService) {}
 
   @Input() defaultText: string = '長按錄音(最長1分鐘)';
@@ -58,6 +59,11 @@ export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   touchendFn(event: TouchEvent) {
+    this.posEnd = event.changedTouches[0].pageX; //获取终点坐标
+    this.endCountTime();
+  }
+
+  touchcancelFn(event: TouchEvent) {
     this.posEnd = event.changedTouches[0].pageX; //获取终点坐标
     this.endCountTime();
   }
@@ -110,12 +116,7 @@ export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
     this.countTimer = 0;
     // 拿到錄音base64數據
     const result = await this.audioService.stopRecording();
-    const { recordDataBase64, mimeType, msDuration } = result.value;
-    this.audio.nativeElement.src = `data:${mimeType};base64,${recordDataBase64}`;
-    this.audio.nativeElement.load();
-    this.playing = false;
-
-    this.createLines(msDuration);
+    this.createWave();
   }
 
   //初始化状态
@@ -129,117 +130,96 @@ export class RecordComponent implements OnInit, OnDestroy, AfterViewInit {
   permission = true;
   async ngOnInit() {
     this.initStatus();
-    const { msDuration = 0 } = this.audioService.getRecording();
-    this.count = Math.floor(msDuration / 1000);
     this.permission = await this.audioService.getPermission();
+
+    this.createWave();
   }
 
   ngOnDestroy() {
     this.pause();
     window.clearInterval(this.countTimer);
-    window.clearInterval(this.playTimer);
-    this.playTimer = 0;
   }
 
   get countFormat() {
     return moment.unix(this.count).format('mm:ss');
   }
 
-  // 錄音内容
-  @ViewChild('audio') audio!: ElementRef;
-  ngAfterViewInit() {
-    const audioElement: HTMLAudioElement = this.audio.nativeElement;
-    setTimeout(() => {
-      audioElement.src = this.audioService.getRecordingSrc();
-    }, 0);
-
-    // 添加播放状态变化事件监听器
-    audioElement.addEventListener('play', () => {
-      // console.log('音频开始播放');
-      this.playing = true;
-    });
-
-    audioElement.addEventListener('pause', () => {
-      // console.log('音频暂停');
-      this.playing = false;
-    });
-
-    audioElement.addEventListener('ended', () => {
-      // console.log('音频播放结束');
-      this.playing = false;
-    });
-    // 在音频加载完成后获取音频的时长
-    audioElement.addEventListener('loadedmetadata', async () => {
-      // 获取音频时长（以秒为单位）
-      while (
-        isNaN(audioElement.duration) ||
-        audioElement.duration === Infinity
-      ) {
-        // 延迟一会 不然网页都卡死
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        // 设置随机播放时间，模拟调进度条
-        audioElement.currentTime = 10000000 * Math.random();
-      }
-
-      // 将时长打印到控制台
-      console.log('音频时长：', audioElement.duration + '秒');
-      audioElement.currentTime = 0;
-    });
-  }
-
   get hasRecording() {
-    return this.audio?.nativeElement?.src?.length > 100;
+    return this.audioService.getRecordingSrc().length > 100;
   }
 
   playing = false;
   del() {
     this.pause();
     this.initStatus();
-    this.currentPlayTime = 0;
-    this.audio.nativeElement.src = '';
     this.audioService.clearRecording();
   }
 
   play() {
-    const time = this.audio?.nativeElement?.duration || this.count;
-    this.audio?.nativeElement?.play();
-    if (!!this.playTimer) return;
-    this.playTimer = window.setInterval(() => {
-      this.currentPlayTime++;
-      if (this.currentPlayTime / 20 >= time) {
-        console.log('stop -----> ');
-        this.currentPlayTime = 0;
-        clearInterval(this.playTimer);
-        this.playTimer = 0;
-      }
-    }, 50);
-  }
-
-  get progress() {
-    const time = this.audio.nativeElement.duration || this.count;
-    return (this.currentPlayTime / 20 / time) * this.lines.length;
+    this.wavesurfer?.play();
   }
 
   pause() {
-    this.audio?.nativeElement?.pause();
-    clearInterval(this.playTimer);
-    this.playTimer = 0;
+    this.wavesurfer?.pause();
   }
 
-  currentPlayTime = 0;
-  playTimer = 0;
-  // 聲音模擬波浪綫
-  lines: number[] = [];
-  createLines(msDuration = 1000) {
+  wavesurfer!: any;
+  createWave() {
     /*
+      預期寬度 40 - 150px
       聲音 1-60 秒，顯示60條綫太長了，
-      開方后 1-8,  * 3 就是 3-24 根綫
+      平方根后 1-8,  * 3 就是 3-24 根綫
       +5，就是 8 - 29 跟綫
-      每根綫寬度5，大概就是 40-150 寬度
+      每根綫寬度5，大概就是 40-150 px
     */
-    const length = Math.floor(Math.sqrt(msDuration / 1000) * 3) + 5;
-    this.lines = new Array(length)
-      .fill(undefined)
-      .map(() => Math.random() * 10 + 2);
+    const { msDuration = 0 } = this.audioService.getRecording();
+    this.count = Math.round(msDuration / 1000);
+    if (msDuration < 1000) return;
+
+    const length = Math.round(Math.sqrt(msDuration / 1000) * 3) + 5;
+    const dom = document.querySelector('#waveform') as HTMLDivElement;
+    dom.style.width = `${length * 5}px`;
+
+    // 銷毀舊數據再生成
+    this.wavesurfer?.destroy();
+    const options = {
+      container: '#waveform',
+      waveColor: 'black',
+      progressColor: '#da5173',
+      cursorColor: 'transparent',
+      barWidth: 2,
+      barRadius: 2,
+      barGap: 4,
+      height: 14, // 设置整体图形高度
+      normalize: true, // 波形圖拉伸到 height
+      interact: false, // 禁止點擊波形圖交互
+      url: this.audioService.getRecordingSrc(),
+      // url: 'assets/long.mp3',
+      // url: 'assets/short.mp3',
+    };
+
+    this.wavesurfer = WaveSurfer.create({
+      ...options,
+    });
+
+    // 启动 WaveSurfer
+    this.wavesurfer.on('ready', () => {
+      // this.play();
+    });
+    // 添加播放状态变化事件监听器
+    this.wavesurfer.on('play', () => {
+      // console.log('音频开始播放');
+      this.playing = true;
+    });
+
+    this.wavesurfer.on('pause', () => {
+      // console.log('音频暂停');
+      this.playing = false;
+    });
+
+    this.wavesurfer.on('finish', () => {
+      // console.log('音频播放结束');
+      this.playing = false;
+    });
   }
 }
