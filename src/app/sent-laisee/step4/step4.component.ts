@@ -31,7 +31,6 @@ type Account = {
 export class Step4Component implements OnInit {
   @Input() form!: FormGroup;
   @Output() nextStep: EventEmitter<number> = new EventEmitter<number>();
-  @ViewChild('inputElement') inputElement!: ElementRef;
 
   constructor(
     private service: SentLaiseeService,
@@ -73,8 +72,9 @@ export class Step4Component implements OnInit {
   index = 0;
   maxLength = 30;
   // 获取光标位置
-  getIndex() {
-    this.index = this.inputElement.nativeElement.selectionStart;
+  getIndex(e: any) {
+    this.index = e.detail?.srcElement?.selectionStart || 0;
+    // console.log(' -----> ', this.index);
   }
   emojiClick(emoji: string) {
     const i = this.index;

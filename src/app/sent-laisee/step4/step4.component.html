@@ -29,8 +29,8 @@
   <form [formGroup]="form">
     <div class="mb6 bold">Blessing (Optional)</div>
     <div class="form-group">
-      <ion-textarea rows="3" [counter]="true" formControlName="blessing" [maxlength]="maxLength" (blur)="getIndex()"
-        class="custom-input blessing form-control" #inputElement></ion-textarea>
+      <ion-textarea rows="3" [counter]="true" formControlName="blessing" [maxlength]="maxLength"
+        (ionBlur)="getIndex($event)" class="custom-input blessing form-control"></ion-textarea>
     </div>
 
     <div *ngIf="blessing?.errors" class="alert">
