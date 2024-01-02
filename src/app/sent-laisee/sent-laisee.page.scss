@@ -72,15 +72,14 @@
 
   .header {
     position: relative;
-    height: 212px;
-    width: 100%;
+    width: 100vw;
     left: 0;
     top: 0;
+    margin-left: -16px;
+    margin-right: -16px;
   }
   .caishen {
-    height: 212px;
     width: 100%;
-    object-fit: cover;
   }
 
   .custom-button {
@@ -174,41 +173,19 @@
   }
   // iPhone SE 等較小機型
   .single {
-    top: 14px;
+    top: 4vw;
     left: 50.5%;
     transform: translateX(-50%);
   }
   .double {
-    top: 14px;
+    top: 4vw;
     left: 58.5%;
     transform: translateX(-50%);
   }
   .double-rotate {
-    top: 22px;
+    top: 6.333vw;
     left: 35%;
     transform: translateX(-50%) rotate(-14deg);
-  }
-
-  /* 媒体查询 iPhone XR 等中等機型 */
-  @media (min-width: 390px) and (-webkit-device-pixel-ratio: 3) {
-    .single,
-    .double {
-      top: 15px;
-    }
-    .double-rotate {
-      top: 21.5px;
-    }
-  }
-
-  /* 媒体查询 iPhone 14 Pro Max 等大型機型 */
-  @media (min-width: 428px) and (-webkit-device-pixel-ratio: 3) {
-    .single,
-    .double {
-      top: 10px;
-    }
-    .double-rotate {
-      top: 18px;
-    }
   }
 
   .select-currency {
@@ -268,8 +245,7 @@
   // 紅包頂部樣式
   .blessingInPic {
     position: absolute;
-    // 不要寫百分比，不同寬度會突破的
-    width: 88px;
+    width: 24vw;
     top: 20%;
     // 圖片不是對稱的！！！
     left: 49.5%;
@@ -281,7 +257,7 @@
     text-align: center;
   }
   .double-blessing {
-    left: 59%;
+    left: 58%;
     top: 21%;
   }
 
