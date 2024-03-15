@@ -18,7 +18,7 @@
     <div>
       <ion-input type="tel" inputmode="tel" enterkeyhint="next" maxLength="6" #myInput autofocus [(ngModel)]="code"
         required (keydown.enter)="goNext()" class="custom-input form-control mb10" color="laisee"
-        placeholder="Please enter a 6-digit OTP" />
+        placeholder="Please enter a 6-digit OTP(test:123456)" />
     </div>
     <div class="color999" *ngIf="count !== 0; else elseBlock">SMS OTP can be resent after <span
         class="color666 bold">{{count}}</span> seconds</div>
