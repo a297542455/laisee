@@ -9,6 +9,7 @@ export class AppComponent {
     { title: 'sent-laisee', url: '/sent-laisee', icon: 'accessibility' },
     { title: 'capacitor', url: '/capacitor', icon: 'camera' },
     { title: 'recording', url: '/recording', icon: 'recording' },
+    { title: 'demo', url: '/demo', icon: 'list' },
   ];
   constructor() {}
 }

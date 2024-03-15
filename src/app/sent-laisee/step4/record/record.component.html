@@ -4,28 +4,28 @@
     <div>請在<strong class="colorlaisee">"手機設置"</strong>中允許使用權限，並重新進入頁面</div>
   </div>
   <div [hidden]="hasRecording">
-    <ion-button block color="white" size="middle" expand="block" class="myBtn" [disabled]="!permission"
-      [class.active]="active" (touchstart)="touchstartFn($event)" (touchmove)="touchmoveFn($event)"
+    <div class="myBtn btn" [class.active]="active" (touchstart)="touchstartFn($event)" (touchmove)="touchmoveFn($event)"
       (touchend)="touchendFn($event)" (touchcancel)="touchcancelFn($event)">
       <div class="btnFlex">
-        <span>{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
-        <span id="btnRecording">{{ text }}</span>
-        <ion-icon name="mic-sharp" color="laisee" class="font20"></ion-icon>
+        <span class="flexItem">{{ !!countTimer && countTimer !== 0 ? countFormat : "" }}</span>
+        <span id="btnRecording flexItem">{{ text }}</span>
+        <ion-icon name="mic-sharp" color="laisee" class="font20 flexItem rightAlign"></ion-icon>
       </div>
-    </ion-button>
+    </div>
   </div>
   <div [hidden]="!hasRecording">
-    <ion-button block color="white" size="middle" expand="block" class="myBtn">
+    <div class="myBtn btn">
       <div class="btnFlex">
-        <span (click)="del()"><ion-icon name="trash-sharp" color="laisee" class="font20"></ion-icon></span>
-        <span class="flex">
+        <ion-icon name="trash-sharp" color="laisee" (click)="del()" class="font20 flexItem"></ion-icon>
+        <span class="flex flexItem">
           <span class="countFormat">{{ countFormat }}︎ </span>
           <span id="waveform"></span>
         </span>
-        <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20"></ion-icon>
-        <ion-icon *ngIf="playing" name="pause-sharp" color="laisee" (click)="pause()" class="font20"></ion-icon>
+        <ion-icon *ngIf="!playing" name="play-sharp" color="laisee" (click)="play()" class="font20 flexItem"></ion-icon>
+        <ion-icon *ngIf="playing" name="pause-sharp" color="laisee" (click)="pause()"
+          class="font20 flexItem"></ion-icon>
       </div>
-    </ion-button>
+    </div>
   </div>
 
   <ion-toast [isOpen]="count >= maxCount - 5 && !hasRecording" position="middle"

@@ -24,7 +24,11 @@ const routes: Routes = [
     path: 'recording',
     loadChildren: () =>
       import('./recording/recording.module').then((m) => m.RecordingPageModule),
+  },  {
+    path: 'demo',
+    loadChildren: () => import('./demo/demo.module').then( m => m.DemoPageModule)
   },
+
 ];
 
 @NgModule({
